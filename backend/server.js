@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Route cho trang đăng nhập
 app.get('/login.html', (req, res) => {
-   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'login.html'));
+   res.sendFile(path.join(__dirname,'https://kngann2201.github.io/TODOLIST_DEMO/public/html/login'));
 });
 
 // Route cho trang đăng ký
