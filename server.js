@@ -28,25 +28,25 @@ app.get('/login.html', (req, res) => {
 
 // Route cho trang đăng ký
 app.get('/register.html', (req, res) => {
-   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'register.html'));
+   res.sendFile(path.join(__dirname, 'public', 'html', 'register.html'));
 });
 
 // Route cho trang chính (index)
 app.get('/index.html', (req, res) => {
-   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'index.html'));
+   res.sendFile(path.join(__dirname,'public', 'html', 'index.html'));
 });
 
 // Cấu hình route chính để hiển thị trang login.html khi truy cập vào localhost:5000
 app.get('*', (req, res) => {
-   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'login.html'));
+   res.sendFile(path.join(__dirname,'public', 'html', 'login.html'));
 });
 
 //Kết nối auth.js với server.js để sử dụng các routes đăng kí và đăng nhập
-const authRoutes = require('./auth');
+const authRoutes = require('./backend/auth');
 app.use('/api/auth', authRoutes);
 
 //Kết nối todo.js với server.js để sử dụng các routes tương tác nhiệm vụ
-const todoRoutes = require('./todo');
+const todoRoutes = require('./backend/todo');
 app.use('/api/todo', todoRoutes);
 
 // Thiết lập server lắng nghe tại cổng 5000
