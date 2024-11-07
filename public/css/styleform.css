@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    background: #FFA07A;
+}
+h1 {
+    text-align: center;
+    color: #fff;
+}
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+input[type="text"], input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+button {
+    width: 95%;
+    padding: 10px;
+    background: #FFA07A;
+    margin: 10px auto;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+button:hover {
+    background: #FF7F50; /* Thay đổi màu sắc khi hover */
+}
+p {
+    text-align: center;
+    cursor: pointer;
+    margin: 10px auto;
+    text-align: center;
+}
+a {
+    color: #FFA07A;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 1;
+    color : black;
+}
+a:hover {
+    text-decoration: underline;
+}
