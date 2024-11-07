@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const path = require('path');
 const cors = require('cors');
 const app = express();
-
+const PORT = 5000;
 // Cấu hình Body-Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,11 +19,11 @@ mongoose.connect('mongodb://localhost:27017/demo', { useNewUrlParser: true, useU
 app.use(cors())
 
 // Cấu hình Express để phục vụ các file tĩnh (html,css,js)
-app.use(express.static(path.join(__dirname, '..', 'public')));
-
+app.use(express.static('public'));
+app.use(express.static('index.html'));
 // Route cho trang đăng nhập
 app.get('/login.html', (req, res) => {
-   res.sendFile(path.join(__dirname,'..', 'index.html'));
+   res.sendFile(path.join(__dirname,'public', 'html', 'login.html'));
 });
 
 // Route cho trang đăng ký
@@ -38,7 +38,8 @@ app.get('/index.html', (req, res) => {
 
 // Cấu hình route chính để hiển thị trang login.html khi truy cập vào localhost:5000
 app.get('*', (req, res) => {
-   res.sendFile(path.join(__dirname,'public', 'html', 'login.html'));
+//    app.use(express.static('public'));
+   app.use(express.static('index.html'));
 });
 
 //Kết nối auth.js với server.js để sử dụng các routes đăng kí và đăng nhập
@@ -50,7 +51,7 @@ const todoRoutes = require('./backend/todo');
 app.use('/api/todo', todoRoutes);
 
 // Thiết lập server lắng nghe tại cổng 5000
-const PORT = 5000;
+
 app.listen(PORT, () => {
    console.log(`Server đang chạy tại http://localhost:${PORT}`);
 });
