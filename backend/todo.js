@@ -17,7 +17,7 @@ router.post('/add', async (req, res) => {
       const newTodo = new Todo({
          userId,
          task,
-         completed: false
+         completed
       });
       await newTodo.save();
       res.status(201).json({ message: 'Nhiệm vụ đã được thêm thành công!' });
@@ -25,6 +25,30 @@ router.post('/add', async (req, res) => {
       res.status(500).json({ message: 'Lỗi thêm nhiệm vụ!' });
    }
 });
+//
+//Xóa nhiệm vụ    
+router.delete('/deleteTask/:id', async (req, res) => {
+   const taskId = req.params.id;
+   try {
+     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+     await client.connect();
+     const db = client.db('demo');
+     const collection = db.collection('todos');
+ 
+     // Xóa nhiệm vụ dựa trên ID
+     const result = await collection.deleteOne({ _id: new ObjectId(taskId) });
+     client.close();
+     if (result.deletedCount === 1) {
+       res.status(200).send('Nhiệm vụ đã được xóa');
+     } else {
+       res.status(404).send('Nhiệm vụ không tồn tại');
+     }
+   } catch (error) {
+     console.error(error);
+     res.status(500).send('Lỗi server');
+   }
+ });
+ //
 // Lấy danh sách nhiệm vụ của người dùng
 router.get('/list/:userId', async (req, res) => {
    try {
