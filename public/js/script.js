@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+//Welcome
+const name = localStorage.getItem('username');
+console.log(name);
+document.getElementById("loginUser").innerHTML = `Chào mừng <span class="username">${name}</span>, hãy lập To-do list ngày hôm nay nhé!`;
 // Tạo và thêm nút đóng cho một mục danh sách
 function addCloseButton(li) {
   var span = document.createElement("SPAN");
@@ -23,27 +27,6 @@ if (ev.target.tagName === 'LI') {
   ev.target.classList.toggle('completed');
 }
 }, false);
-
-// Tạo một mục danh sách mới
-// function newElement() {
-// var li = document.createElement("li");
-// var inputValue = document.getElementById("myInput").value;
-// var t = document.createTextNode(inputValue);
-// li.appendChild(t);
-// if (inputValue === '') {
-//   alert("Hãy viết nội dung trước khi thêm nhé!");
-// } else {
-//   document.getElementById("myUL").appendChild(li);
-//   addCloseButton(li); // Thêm nút đóng cho mục mới add
-// }
-// document.getElementById("myInput").value = "";
-// }
-// function newElement() {
-// var li = document.createElement("li");
-// var inputValue = document.getElementById("myInput").value;
-// var t = document.createTextNode(inputValue);
-
-
 // Tạo phần tử danh sách mới
 const input = document.getElementById('myInput');
 const userId = localStorage.getItem('userId');

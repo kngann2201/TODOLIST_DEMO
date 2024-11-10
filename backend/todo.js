@@ -29,7 +29,6 @@ router.post('/add', async (req, res) => {
 router.get('/list/:userId', async (req, res) => {
    try {
       const { userId } = req.params;
-      // const tasks = await Todo.find({ userId }).sort({ createdAt: -1 });
       const tasks = await Todo.find({ userId }).select('task completed').sort({ createdAt: -1 });
       // Kiểm tra nếu không có nhiệm vụ
       if (tasks.length === 0) {

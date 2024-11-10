@@ -12,10 +12,6 @@ router.post('/register', async (req, res) => {
       if (existingUser) {
          return res.status(400).json({ message: 'Tên người dùng đã tồn tại!' });
       }
-      // Mã hóa mật khẩu
-      // const hashedPassword = await bcrypt.hash(password, 10);
-      // Tạo người dùng mới
-      // const newUser = new User({ username, password: hashedPassword });
       const newUser = new User({ username, password});
       await newUser.save();
       res.status(201).json({ message: 'Đăng ký thành công!' });
@@ -32,6 +28,7 @@ router.post('/login', async (req, res) => {
       console.log(`Đăng nhập với username: ${username}`);
       // Tìm người dùng theo username
       const user = await User.findOne({ username });
+      console.log('Kết quả tìm kiếm người dùng:', user);
       if (!user) {
          return res.status(400).json({ message: 'Không tồn tại người dùng này!' });
       }
@@ -39,7 +36,7 @@ router.post('/login', async (req, res) => {
       if (password !== user.password) {
          return res.status(400).json({ message: 'Sai mật khẩu!' });
       }
-      res.status(200).json({ message: 'Đăng nhập thành công!', userId: user._id });
+      res.status(200).json({ message: 'Đăng nhập thành công!', userId: user._id, username: user.username  });
    } catch (error) {
       res.status(500).json({ message: 'Lỗi server!' });
    }

@@ -44,9 +44,11 @@ loginForm.addEventListener('submit', async (event) => {
         if (response.ok) {
             console.log("test")
             alert('Đăng nhập thành công!');
-            // Lưu trữ userId để sử dụng cho To-Do List
+            // Lưu trữ thông tin 
             localStorage.setItem('userId', data.userId);
+            localStorage.setItem('username', data.username);
             window.location.href = 'index.html'; 
+
         } else {
             alert(data.message || 'Đã có lỗi xảy ra.');
         }
