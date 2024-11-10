@@ -13,9 +13,10 @@ router.post('/register', async (req, res) => {
          return res.status(400).json({ message: 'Tên người dùng đã tồn tại!' });
       }
       // Mã hóa mật khẩu
-      const hashedPassword = await bcrypt.hash(password, 10);
+      // const hashedPassword = await bcrypt.hash(password, 10);
       // Tạo người dùng mới
-      const newUser = new User({ username, password: hashedPassword });
+      // const newUser = new User({ username, password: hashedPassword });
+      const newUser = new User({ username, password});
       await newUser.save();
       res.status(201).json({ message: 'Đăng ký thành công!' });
    } catch (error) {
@@ -32,12 +33,11 @@ router.post('/login', async (req, res) => {
       // Tìm người dùng theo username
       const user = await User.findOne({ username });
       if (!user) {
-         return res.status(400).json({ message: 'Sai tên người dùng hoặc mật khẩu!' });
+         return res.status(400).json({ message: 'Không tồn tại người dùng này!' });
       }
       // Kiểm tra mật khẩu
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-         return res.status(400).json({ message: 'Sai tên người dùng hoặc mật khẩu!' });
+      if (password !== user.password) {
+         return res.status(400).json({ message: 'Sai mật khẩu!' });
       }
       res.status(200).json({ message: 'Đăng nhập thành công!', userId: user._id });
    } catch (error) {

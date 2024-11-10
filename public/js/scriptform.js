@@ -15,7 +15,7 @@ registerForm.addEventListener('submit', async (event) => {
         const data = await response.json();
         if (response.ok) {
             alert('Đăng ký thành công!');
-            window.location.href = 'login.html'; // Chuyển hướng sang trang đăng nhập
+            window.location.href = 'login.html'; 
         } else {
             alert(data.message || 'Đã có lỗi xảy ra.');
         }
@@ -46,8 +46,7 @@ loginForm.addEventListener('submit', async (event) => {
             alert('Đăng nhập thành công!');
             // Lưu trữ userId để sử dụng cho To-Do List
             localStorage.setItem('userId', data.userId);
-
-            window.location.href = 'index.html'; // Chuyển hướng về trang To-Do List
+            window.location.href = 'index.html'; 
         } else {
             alert(data.message || 'Đã có lỗi xảy ra.');
         }
