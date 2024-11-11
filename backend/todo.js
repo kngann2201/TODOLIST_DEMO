@@ -7,7 +7,7 @@ const router = express.Router();
 // Thêm nhiệm vụ mới
 router.post('/add', async (req, res) => {
    try {
-      const { userId, task } = req.body;  
+      let { userId, task, completed } = req.body;  
       console.log(req.body);  
       // Kiểm tra người dùng tồn tại
       const user = await User.findById(userId);
@@ -27,7 +27,7 @@ router.post('/add', async (req, res) => {
 });
 //
 //Xóa nhiệm vụ    
-router.delete('/deleteTask/:id', async (req, res) => {
+router.delete('/deleteTask/:taskId', async (req, res) => {
    const taskId = req.params.id;
    try {
      const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -77,7 +77,7 @@ router.put('/complete/:todoId', async (req, res) => {
          return res.status(404).json({ message: 'Nhiệm vụ không tồn tại!' });
       }
 
-      todo.isCompleted = true;
+      todo.completed = true;
       await todo.save();
 
       res.status(200).json({ message: 'Nhiệm vụ đã được đánh dấu hoàn thành!' });

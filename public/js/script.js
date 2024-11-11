@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 //Welcome
 const name = localStorage.getItem('username');
-console.log(name);
+console.log(name); //kiểm tra
 document.getElementById("loginUser").innerHTML = `Chào mừng <span class="username">${name}</span>, hãy lập To-do list ngày hôm nay nhé!`;
 // Tạo và thêm nút đóng cho một mục danh sách
 // function addCloseButton(li) {
@@ -27,41 +27,29 @@ function addCloseButton(li, taskId) {
     div.remove();
 
     // Gửi yêu cầu DELETE để xóa nhiệm vụ khỏi MongoDB
-    fetch(`/tasks/${taskId}`, {
+    fetch(`/deleteTask/${taskId}`, {
       method: 'DELETE'
     })
     .then(response => {
       if (!response.ok) {
         throw new Error('Xóa nhiệm vụ thất bại.');
       }
-      console.log('Nhiệm vụ đã được xóa thành công khỏi MongoDB');
+      console.log('Nhiệm vụ đã được xóa thành công khỏi MongoDB'); //kiểm tra
     })
     .catch(error => console.error('Có lỗi khi xóa nhiệm vụ:', error));
   };
 }
-
 // Thêm nút xóa vào mỗi mục danh sách hiện có
 var myNodelist = document.getElementsByTagName("LI");
 for (let i = 0; i < myNodelist.length; i++) {
 addCloseButton(myNodelist[i]);
 }
-// Đánh dấu mục đã hoàn thành 
-var status = false; //test
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-if (ev.target.tagName === 'LI') {
-  ev.target.classList.toggle('completed');
-}
-if (ev.target.classList.contains('completed')) status = true; //test
-console.log(ev.target.textContent,  status);
-}, false);
-// Tạo phần tử danh sách mới
+//Tạo phần tử danh sách mới
 const input = document.getElementById('myInput');
 const userId = localStorage.getItem('userId');
-console.log('id:',userId);
-const inputValue = input.value;
+console.log('id:',userId); //kiểm tra
 function newElement() {
-  // const inputValue = input.value;
+  const inputValue = input.value;
   console.log('inputValue:', inputValue);
   if (!inputValue) {
     alert("Hãy viết nội dung trước khi thêm nhé!");
@@ -71,48 +59,53 @@ function newElement() {
   li.textContent = inputValue;
   document.getElementById("myUL").appendChild(li);
   addCloseButton(li);
-  
-// // Gửi nhiệm vụ mới lên server để lưu vào MongoDB
-//   fetch('http://localhost:5000/api/todo/add', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json'},
-//       body: JSON.stringify({ userId: userId, task: inputValue, completed: status }) 
-//   })
-//   .then(response => response.json())
-//   .then(data => {
-//       console.log(data.message); 
-//   })
-//   .catch(error => {
-//       console.error('Lỗi khi thêm nhiệm vụ:', error);
-//   });
-//   input.value = "";
+  // Gửi nhiệm vụ mới lên server để lưu vào MongoDB
+  fetch('http://localhost:5000/api/todo/add', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json'},
+    body: JSON.stringify({ userId: userId, task: inputValue, completed: false }) 
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log(data.message); 
+      li.setAttribute('data-id', data.todoId);
+  })
+  .catch(error => {
+      console.error('Lỗi khi thêm nhiệm vụ:', error);
+  });
+  input.value = "";
 }
-function newA() {
-// Gửi nhiệm vụ mới lên server để lưu vào MongoDB
-fetch('http://localhost:5000/api/todo/add', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json'},
-  body: JSON.stringify({ userId: userId, task: inputValue, completed: status }) 
-})
-.then(response => response.json())
-.then(data => {
-  console.log(data.message); 
-})
-.catch(error => {
-  console.error('Lỗi khi thêm nhiệm vụ:', error);
-});
-input.value = "";
-}
-// Xử lí "Add"
+// Xử lí "Add" 
 document.getElementById("addButton").addEventListener("click", newElement);
 // Xử lí "Enter" từ bàn phím
 document.getElementById("myInput").addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
-      newElement();
+      newElement();   
   }
 });
-// Xử lí trạng thái nhiệm vụ
-document.getElementsByTagNameNS('http://localhost:5000/index.html','LI').addEventListener("click", newA());
+//Đánh dấu mục đã hoàn thành 
+const list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+if (ev.target.tagName === 'LI') {
+  ev.target.classList.toggle('completed');
+}
+const status = ev.target.classList.contains('completed');
+console.log(status); //kiểm tra
+const todoId = ev.target.getAttribute('data-id'); //
+// Cập nhật lại status trên MongoDB
+  fetch('http://localhost:5000/api/todo/complete/${todoId}', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json'},
+    body: JSON.stringify({ completed: status }) 
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log(data.message); 
+  })
+  .catch(error => {
+    console.error('Lỗi khi cập nhật trạng thái nhiệm vụ:', error);
+  });
+}, false);
 
 // Lấy danh sách nhiệm vụ từ server
 async function loadTasks() {
@@ -135,11 +128,8 @@ async function loadTasks() {
         todos.forEach(task => {
             const li = document.createElement('li');
             li.textContent = task.task;
-            if (task.isCompleted) {
-                li.style.textDecoration = 'line-through'; 
-                //
-                // localStorage.setItem('completed', data.task.isCompleted);
-                //
+            if (task.completed) {
+              li.style.textDecoration = 'line-through'; 
             }
             todoList.appendChild(li);
             addCloseButton(li);
