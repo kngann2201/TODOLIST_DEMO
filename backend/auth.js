@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
       // Tìm người dùng theo username
       const user = await User.findOne({ username });
       if (!user) {
-         return res.status(400).json({ message: 'Không tồn tại người dùng này!' });
+         return res.json({ message: 'Không tồn tại người dùng này!' });
       }
       // Kiểm tra mật khẩu
       if (password !== user.password) {
@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
       }
       res.json({ message: 'Đăng nhập thành công!', userId: user._id });
    } catch (error) {
-      res.status(500).json({ message: 'Lỗi server!' });
+      res.json({ message: 'Lỗi server!' });
    }
 });
 module.exports = router;
