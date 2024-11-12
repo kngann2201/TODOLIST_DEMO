@@ -89,49 +89,32 @@ function addCloseButton(li) {
   span.appendChild(txt);
   li.appendChild(span);
   // const targetId = span.parentElement.dataset.taskId;
-  // console.log(targetId);
+  // console.log(taskId);
+  //Xóa trên html  
+  span.onclick = function() {
+    // event.preventDefault();
+    var delspan = this.parentElement;
+    const taskId = span.parentElement.dataset.taskId;
+    console.log(taskId);
+    delspan.remove();
+    //Gửi yêu cầu xóa đến MongoDB
+    fetch(`http://localhost:5000/api/todo/delete/${taskId}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Xóa nhiệm vụ thất bại.');
+        }
+        console.log('Nhiệm vụ đã được xóa thành công khỏi MongoDB'); //kiểm tra
+      })
+      .catch(error => console.error('Có lỗi khi xóa nhiệm vụ:', error));
+  }
 }
-  // //Xóa trên html  
-  // span.onclick = function() {
-  //   var delspan = this.parentElement;
-  //   delspan.remove();
-  //   const taskId = delspan.dataset.taskId;
-  //   console.log(taskId);
-  // //Gửi yêu cầu xóa đến MongoDB
-  // fetch(`/deleteTask/${taskId}`, {
-  //     method: 'DELETE'
-  //   })
-  //   .then(response => {
-  //     if (!response.ok) {
-  //       throw new Error('Xóa nhiệm vụ thất bại.');
-  //     }
-  //     console.log('Nhiệm vụ đã được xóa thành công khỏi MongoDB'); //kiểm tra
-  //   })
-  //   .catch(error => console.error('Có lỗi khi xóa nhiệm vụ:', error));
-  // }
 // Thêm nút xóa vào mỗi mục danh sách hiện có
 var myNodelist = document.getElementsByTagName("LI");
 for (let i = 0; i < myNodelist.length; i++) {
 addCloseButton(myNodelist[i]);
 }
-// //Xóa trên html  
-// span.onclick = function() {
-//   var delspan = this.parentElement;
-//   delspan.remove();
-//Gửi yêu cầu DELETE để xóa nhiệm vụ khỏi MongoDB
-// const taskId = delspan.dataset.taskId;
-// console.log(taskId);
-// fetch(`/deleteTask/${taskId}`, {
-//     method: 'DELETE'
-//   })
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error('Xóa nhiệm vụ thất bại.');
-//     }
-//     console.log('Nhiệm vụ đã được xóa thành công khỏi MongoDB'); //kiểm tra
-//   })
-//   .catch(error => console.error('Có lỗi khi xóa nhiệm vụ:', error));
-// };
 
 //Đánh dấu mục đã hoàn thành 
 const list = document.querySelector('ul');
@@ -139,13 +122,11 @@ list.addEventListener('click', function(ev) {
 if (ev.target.tagName === 'LI') {
   ev.target.classList.toggle('completed');
 }
-// const taskId = data.taskId;
 const taskId = ev.target.dataset.taskId;
 console.log(taskId);
 const status = ev.target.classList.contains('completed');
 console.log(status); //kiểm tra
 // Cập nhật lại status trên MongoDB
-  // const taskId = localStorage.getItem('taskId');
   fetch(`http://localhost:5000/api/todo/complete/${taskId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json'},
