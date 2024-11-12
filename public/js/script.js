@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 //Welcome
-const name = localStorage.getItem('username');
+const name = localStorage.getItem('name');
 const userId = localStorage.getItem('userId');
 const taskId = localStorage.getItem('taskId');
 console.log(name); //kiểm tra
