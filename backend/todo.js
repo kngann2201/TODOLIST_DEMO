@@ -53,6 +53,7 @@ router.post('/add', async (req, res) => {
 router.delete('/deleteTask/:taskId', async (req, res) => {
    const { taskId } = req.params;
    try {
+   // const todo = await Todo.findById(taskId);
    //   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
    //   await client.connect();
    //   const db = client.db('demo');

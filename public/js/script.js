@@ -5,6 +5,7 @@ const userId = localStorage.getItem('userId');
 const taskId = localStorage.getItem('taskId');
 console.log(name); //kiểm tra
 document.getElementById("loginUser").innerHTML = `Chào mừng <span class="username">${name}</span>, hãy lập To-do list ngày hôm nay nhé!`;
+
 // Lấy danh sách nhiệm vụ từ server
 async function loadTasks() {
   if (!userId) {
@@ -26,6 +27,7 @@ async function loadTasks() {
       todos.forEach(task => {
           const li = document.createElement('li');
           li.textContent = task.task;
+          li.dataset.taskId = task._id;
           if (task.completed === true) {
             li.classList.add("completed"); 
           }
@@ -37,6 +39,7 @@ async function loadTasks() {
   }
 }
 loadTasks();
+
 //Tạo phần tử danh sách mới
 const input = document.getElementById('myInput');
 console.log('id:',userId); //kiểm tra
@@ -50,9 +53,7 @@ function newElement() {
   const li = document.createElement("li");
   li.textContent = inputValue;
   const list = document.getElementById("myUL");
-  list.insertBefore(li, list.firstChild);
-  addCloseButton(li);
-  // Gửi nhiệm vụ mới lên server để lưu vào MongoDB
+// Gửi nhiệm vụ mới lên server để lưu vào MongoDB
   fetch('http://localhost:5000/api/todo/add', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json'},
@@ -61,14 +62,14 @@ function newElement() {
   .then(response => response.json())
   .then(data => {
       console.log(data.message);
-      const taskId = data.taskId;
-      console.log(data)
-      console.log(taskId);
-      localStorage.setItem('taskId', taskId);
+      console.log(data);
+      li.dataset.taskId = data.taskId;
   })
   .catch(error => {
       console.error('Lỗi khi thêm nhiệm vụ:', error);
   });
+  list.insertBefore(li, list.firstChild);
+  addCloseButton(li);
   input.value = "";
 }
 // Xử lí "Add" 
@@ -79,36 +80,47 @@ document.getElementById("myInput").addEventListener("keypress", function(event) 
       newElement();   
   }
 });
-// Tạo và thêm nút đóng cho một mục danh sách
-// function addCloseButton(li) {
-//   var span = document.createElement("SPAN");
-//   var txt = document.createTextNode("\u00D7"); // u00D7 : Dấu x
-//   span.className = "close";
-//   span.appendChild(txt);
-//   li.appendChild(span);
-//   span.onclick = function() {
-//       var div = this.parentElement;
-//       div.remove(); 
-//   }
-// }
-function addCloseButton(li, taskId) {
+
+//Hàm thêm nút đóng cho một mục danh sách
+function addCloseButton(li) {
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);
+  // const targetId = span.parentElement.dataset.taskId;
+  // console.log(targetId);
 }
+  // //Xóa trên html  
+  // span.onclick = function() {
+  //   var delspan = this.parentElement;
+  //   delspan.remove();
+  //   const taskId = delspan.dataset.taskId;
+  //   console.log(taskId);
+  // //Gửi yêu cầu xóa đến MongoDB
+  // fetch(`/deleteTask/${taskId}`, {
+  //     method: 'DELETE'
+  //   })
+  //   .then(response => {
+  //     if (!response.ok) {
+  //       throw new Error('Xóa nhiệm vụ thất bại.');
+  //     }
+  //     console.log('Nhiệm vụ đã được xóa thành công khỏi MongoDB'); //kiểm tra
+  //   })
+  //   .catch(error => console.error('Có lỗi khi xóa nhiệm vụ:', error));
+  // }
 // Thêm nút xóa vào mỗi mục danh sách hiện có
 var myNodelist = document.getElementsByTagName("LI");
 for (let i = 0; i < myNodelist.length; i++) {
 addCloseButton(myNodelist[i]);
 }
-// //xóa trên html  
+// //Xóa trên html  
 // span.onclick = function() {
-//   var div = this.parentElement;
-//   div.remove();
-// // Gửi yêu cầu DELETE để xóa nhiệm vụ khỏi MongoDB
-
+//   var delspan = this.parentElement;
+//   delspan.remove();
+//Gửi yêu cầu DELETE để xóa nhiệm vụ khỏi MongoDB
+// const taskId = delspan.dataset.taskId;
+// console.log(taskId);
 // fetch(`/deleteTask/${taskId}`, {
 //     method: 'DELETE'
 //   })
@@ -127,7 +139,9 @@ list.addEventListener('click', function(ev) {
 if (ev.target.tagName === 'LI') {
   ev.target.classList.toggle('completed');
 }
-const taskId = data.taskId;
+// const taskId = data.taskId;
+const taskId = ev.target.dataset.taskId;
+console.log(taskId);
 const status = ev.target.classList.contains('completed');
 console.log(status); //kiểm tra
 // Cập nhật lại status trên MongoDB
