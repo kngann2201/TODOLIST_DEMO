@@ -31,6 +31,15 @@ async function loadTasks() {
           if (task.completed === true) {
             li.classList.add("completed"); 
           }
+          const selectElement = document.getElementById("myItem");
+          let classF = null;
+          for (let option of selectElement.options) {
+            if (option.value === task.filter) {
+                classF = option.id; 
+                break; 
+            }
+          }
+          li.classList.add(classF);
           todoList.appendChild(li);
           addCloseButton(li);
       });
@@ -53,11 +62,16 @@ function newElement() {
   const li = document.createElement("li");
   li.textContent = inputValue;
   const list = document.getElementById("myUL");
+  const selectElement = document.getElementById("myItem");
+  const choice = selectElement.options[selectElement.selectedIndex].text;
+  const choices = selectElement.options[selectElement.selectedIndex].id;
+  console.log(choice);
+  li.classList.add(choices);
 // Gửi nhiệm vụ mới lên server để lưu vào MongoDB
   fetch('http://localhost:5000/api/todo/add', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify({ userId: userId, task: inputValue, completed: false }) 
+    body: JSON.stringify({ userId: userId, task: inputValue, completed: false, filter: choice }) 
   })
   .then(response => response.json())
   .then(data => {
@@ -88,11 +102,8 @@ function addCloseButton(li) {
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);
-  // const targetId = span.parentElement.dataset.taskId;
-  // console.log(taskId);
   //Xóa trên html  
   span.onclick = function() {
-    // event.preventDefault();
     var delspan = this.parentElement;
     const taskId = span.parentElement.dataset.taskId;
     console.log(taskId);

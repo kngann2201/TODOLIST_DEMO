@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/list/:userId', async (req, res) => {
    try {
       const { userId } = req.params;
-      const tasks = await Todo.find({ userId }).select('task completed').sort({ createdAt: -1 });
+      const tasks = await Todo.find({ userId }).select('task completed filter').sort({ createdAt: -1 });
       // Kiểm tra nếu không có nhiệm vụ
       if (tasks.length === 0) {
          console.log('Không có nhiệm vụ nào được tìm thấy cho userId:', userId);
@@ -25,7 +25,7 @@ router.get('/list/:userId', async (req, res) => {
 // Thêm nhiệm vụ mới
 router.post('/add', async (req, res) => {
    try {
-      let { userId, task, completed } = req.body;  
+      let { userId, task, completed, filter } = req.body;  
       // Kiểm tra người dùng tồn tại
       const user = await User.findById(userId);
       if (!user) {
@@ -34,7 +34,8 @@ router.post('/add', async (req, res) => {
       const newTodo = new Todo({
          userId,
          task,
-         completed
+         completed, 
+         filter
       });
       try {
          const savedTodo = await newTodo.save();  
