@@ -15,7 +15,7 @@ router.get('/list/:userId', async (req, res) => {
          return res.json([]);
      }
      else {
-      console.log('Các nhiệm vụ tìm thấy:', tasks);
+      // console.log('Các nhiệm vụ tìm thấy:', tasks);
       res.json(tasks);
       }
    } catch (error) {
@@ -39,7 +39,7 @@ router.post('/add', async (req, res) => {
       try {
          const savedTodo = await newTodo.save();  
          res.json({ message: 'lưu id thành công!', taskId: savedTodo._id });
-         console.log(savedTodo._id);
+         // console.log(savedTodo._id);
        } catch (error) {
          console.error('Lỗi khi lưu nhiệm vụ:', error);
          res.json({ message: 'lưu id thất bại!' });
