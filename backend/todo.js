@@ -15,13 +15,13 @@ router.get('/list/:userId', async (req, res) => {
          return res.json([]);
      }
      else {
-      // console.log('Các nhiệm vụ tìm thấy:', tasks);
       res.json(tasks);
       }
    } catch (error) {
       res.json({ message: 'Lỗi khi lấy danh sách từ server!' });
    }
 });
+
 // Thêm nhiệm vụ mới
 router.post('/add', async (req, res) => {
    try {
@@ -49,7 +49,7 @@ router.post('/add', async (req, res) => {
       res.json({ message: 'Lỗi thêm nhiệm vụ!' });
    }
 });
-//
+
 //Xóa nhiệm vụ    
 router.delete('/delete/:taskId', async (req, res) => {
    // const { taskId } = req.params;
@@ -72,7 +72,6 @@ router.delete('/delete/:taskId', async (req, res) => {
      res.send('Lỗi server');
    }
  });
- //
 
 // Đánh dấu nhiệm vụ hoàn thành
 router.put('/complete/:taskId', async (req, res) => {
