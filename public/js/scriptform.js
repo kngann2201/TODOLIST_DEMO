@@ -45,9 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (response.ok) {
                     console.log("test")
                     alert('Đăng nhập thành công!');
-                    // Lưu trữ để sử dụng cho
+                    // Lưu trữ để sử dụng 
                     localStorage.setItem('userId', data.userId);
-                    window.location.href = 'index.html'; 
+                    localStorage.setItem('name', data.name);
+                    window.location.href = 'home.html'; 
                 } else {
                     alert(data.message || 'Đã có lỗi xảy ra.');
                 }

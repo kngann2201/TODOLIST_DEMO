@@ -1,0 +1,103 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin:0;
+    padding: 0;
+    z-index: -1;
+    display: flex;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+a{
+    text-decoration: none;
+    color: #fffbfa
+}
+
+section.backGround{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    color:  #cd7c5d;
+    font-size: 60px;
+    font-weight: bold;
+    background-size: cover;
+}
+/* Hiệu ứng star */
+canvas {
+    width: 100%;
+    height: 100%;
+    position:absolute;
+}
+.star{
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    overflow: hidden;
+    background-color: #f89d73;
+}
+.star>img{
+    position:absolute;
+    height: 100%;
+}
+/* Phần tiêu đề */
+section.backGround>div.headline{
+    display: flex;
+    z-index: 999;
+    width: 40%;
+    height: 100%;
+    align-items:center;
+    margin-left: 50% ;
+    position: absolute;
+}
+.information{
+    width: 100%;
+}
+#slogan{
+    font-size: 18px;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+#slogan>img{
+    font-size: 18px;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+/* Phần nút chọn */
+.choose{
+    display: block;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+button {
+    border: none;
+}
+.buttonChosse{
+    font-size: 16px;
+    color: #000000;
+    padding: 0 20px;
+    height: 50px;
+    border-radius: 25px;
+    background: #fffbfa;
+    z-index: 1;
+    transition: all 1s;
+    font-weight: bold;
+    width: 40%;
+    margin-left: 30%;
+}
+.buttonChosse:hover{
+    cursor: pointer;
+    color: #fffbfa;
+    background: -webkit-linear-gradient(bottom, #f89d73, #f7936c);
+    transform: scale(1.2);
+    transition: all 1s;
+}
+.copyright{
+    text-align: center;
+    font-size: 15px;
+    color: #fffbfa;
+    margin-top: 1rem;
+}

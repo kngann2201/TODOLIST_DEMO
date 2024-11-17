@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const userId = localStorage.getItem('userId');
   const taskId = localStorage.getItem('taskId');
   console.log(name); //kiểm tra
-  document.getElementById("loginUser").innerHTML = `Chào mừng <span class="username">${name}</span>, hãy lập To-do list ngày hôm nay nhé!`;
-
+  document.getElementById("name").innerHTML = `${name}`;
+  // document.getElementById("loginUser").innerHTML = `Chào mừng <span class="username">${name}</span>, hãy lập To-do list ngày hôm nay nhé!`;
   // Lấy danh sách nhiệm vụ từ server
   async function loadTasks() {
     if (!userId) {
@@ -13,15 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'login.html';
         return;
     }
-    console.log('Đang gửi yêu cầu API để tải nhiệm vụ...');  // Kiểm tra 
+    // console.log('Đang gửi yêu cầu API để tải nhiệm vụ...');  // Kiểm tra 
     try {
         const response = await fetch(`http://localhost:5000/api/todo/list/${userId}`);
         if (!response.ok) {
           throw new Error('Không thể tải nhiệm vụ');
         }
-        console.log('API đã được gửi', response);  // Kiểm tra
+        // console.log('API đã được gửi', response);  // Kiểm tra
         const todos = await response.json();
-        console.log(todos)   // Kiểm tra
+        // console.log(todos)   // Kiểm tra
         const todoList = document.getElementById('myUL');
         todoList.innerHTML = ''; 
         todos.forEach(task => {
@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
         console.log(data.message);
         console.log(data);
+        console.log('Thêm nhiệm vụ thành công!');
         li.dataset.taskId = data.taskId;
     })
     .catch(error => {
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
           if (!response.ok) {
             throw new Error('Xóa nhiệm vụ thất bại.');
           }
-          console.log('Nhiệm vụ đã được xóa thành công khỏi MongoDB'); //kiểm tra
+          console.log('Nhiệm vụ đã được xóa thành công!'); //history
         })
         .catch(error => console.error('Có lỗi khi xóa nhiệm vụ:', error));
     }
@@ -134,10 +135,16 @@ document.addEventListener('DOMContentLoaded', function() {
     ev.target.classList.toggle('completed');
   }
   const taskId = ev.target.dataset.taskId;
-  console.log(taskId);
+  // console.log(taskId);
   const status = ev.target.classList.contains('completed');
-  console.log(status); //kiểm tra
+  // console.log(status); //kiểm tra
   // Cập nhật lại status trên MongoDB
+  if (!taskId)
+    {
+      console.log("Không tìm thấy nhiệm vụ để cập nhật!")
+      return;
+    } 
+    else {
     fetch(`http://localhost:5000/api/todo/complete/${taskId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json'},
@@ -146,10 +153,12 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
         console.log(data.message); 
+        console.log("Cập nhật trạng thái nhiệm vụ thành công!");
     })
     .catch(error => {
       console.error('Lỗi khi cập nhật trạng thái nhiệm vụ:', error);
     });
+  }
   }, false);
 
   console.log('DOM is ready');

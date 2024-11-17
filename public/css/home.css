@@ -1,0 +1,207 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: auto;
+    padding: 0;
+    z-index: -1;
+    display: flex;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+}
+a{
+    text-decoration: none;
+    color: #fffbfa
+}
+/* Phần bên trái*/
+section.left{
+    margin-left: 0;
+    margin-right: auto;
+    width: 80%;
+    height: 100%;
+    /* background-color:  #fdfbf7; */
+    color:  #cd7c5d;
+    font-size: 60px;
+    font-weight: bold;
+    background-image: url(../img/Download\ premium\ psd\ _\ image\ of\ Artsy\ psd\ shimmering\ golden\ stars\ pattern\ banner\ by\ Aum\ about\ backgrounds\,\ stars\,\ design\ background\,\ pattern\,\ and\ glitter\ 2681052\(1\).jpeg);
+    background-size: cover;
+}
+/* Phần lời chào */
+section.left>div.nameWelcom{
+    display: flex;
+    z-index: 999;
+    width: 80%;
+    height: 100%;
+    align-items:center;
+    margin:auto;
+    margin-top: -2%;
+    position: absolute;
+    flex-direction: column;
+}
+.information{
+    width: 100%;
+}
+#loginUser {
+    display: block;
+    text-align: center;
+    margin-top: 22%;
+}
+.username {
+    font-weight: bold; 
+    text-transform: uppercase;
+}
+#slogan{
+    font-size: 18px;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 1rem;
+}
+#start-button {
+    padding : 1rem;
+    color : white;
+    background-color: #fbc2ab;
+    display : block;
+    font-size: 1rem;
+    text-align: center;
+    margin : 1rem auto;
+    border-radius: 1rem;
+    transition: 0.2s;
+    cursor : grab;
+}
+#start-button:hover {
+    padding : 1.2rem;
+    font-weight: bold;
+    background-color: #f18553;
+}
+/* Phần background */
+section.left>div.backGroundMeo{
+    width: 80%;
+    height: 100%;
+    position:absolute;
+}
+section.left>div.backGroundMeo>img{
+    display: block;
+    position: absolute;
+}
+div.backGroundMeo>img:nth-child(1){
+    margin-left: 70%;
+    margin-top: 5%;
+}
+div.backGroundMeo>img:nth-child(2){
+    margin-top: 32%;
+    overflow: hidden;
+}
+div.backGroundMeo>img:nth-child(4){
+    margin-top: 28.5%;
+    margin-left: 77%;
+    overflow: hidden;
+}
+/* Phần menu bên phải */
+section.right{
+    background-color:  #f89d73;
+    margin-left: auto;
+    margin-right: 0;
+    width: 20%;
+    color: #fffbfa;
+    font-size: 16px;
+    z-index: 1000;
+}
+section.right>section{
+    position: fixed;
+}
+.avatarName{
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+}
+.avatarName>div{
+    display: flex;
+    align-items:center;
+    margin: 0 10px;
+}
+.avatarName>div>img{
+    width: 30%;
+}
+.avatarName>div>span{
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 5px;
+    text-align: left;
+}
+.avatarName>div>a{
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 20px;
+}
+/* Thêm công việc */
+.addbusiness{
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.circle {
+    background: #fffbfa;
+    clip-path: circle(50%);
+    height: 2.4rem;
+    width: 2.4rem;
+}
+.circle{
+    font-size: 2.05rem;
+    font-weight: 500;
+    color:  #f89d73;
+}
+.addbusiness>span{
+    padding-left: 10px;
+    font-size: 16px;
+}
+.circle:hover{
+    animation: pulse 1.5s;
+}
+  @keyframes pulse {
+    0% {
+      transform: scale(.85);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 50px rgba(#5a99d4, 0);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(#5a99d4, 0);
+    }
+  }
+/* menu */
+.manage{
+    display: flex;
+}
+.menuSmall{
+    list-style-type: none;
+    padding: 0 20px;
+    margin: 0;
+}
+.menuSmall li{
+    padding: 8px;
+    margin-left: 10px;
+}
+.menuSmall>li>a>span{
+    padding-left: 5px;
+}
+.menuBig{
+    font-size: 17px;
+    padding: 20px;
+    padding-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    padding-top: 10px;
+}
+.menuSmall i{
+    color: #fffbfa
+}
+.copyright{
+    margin-top: 40%;
+    text-align: center;
+    font-size: 15px;
+}

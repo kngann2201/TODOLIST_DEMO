@@ -1,5 +1,4 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
 const User = require('./models/User');
 const router = express.Router();
 
@@ -14,7 +13,6 @@ router.post('/register', async (req, res) => {
       }
       const newUser = new User({ username, password, name});
       await newUser.save();
-      res.json({ message: 'Đăng ký thành công!', name: newUser.name });
       res.status(201).json({ message: 'Đăng ký thành công!', name: newUser.name });
    } catch (error) {
       resstatus(500).json({ message: 'Lỗi server!' });
@@ -34,7 +32,7 @@ router.post('/login', async (req, res) => {
       if (password !== user.password) {
          return res.status(400).json({ message: 'Sai mật khẩu!' });
       }
-      res.status(200).json({ message: 'Đăng nhập thành công!', userId: user._id });
+      res.status(200).json({ message: 'Đăng nhập thành công!', userId: user._id, name: user.name});
    } catch (error) {
       res.status(500).json({ message: 'Lỗi server!' });
    }

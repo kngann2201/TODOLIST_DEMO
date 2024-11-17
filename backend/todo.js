@@ -62,7 +62,7 @@ router.delete('/delete/:taskId', async (req, res) => {
    // const result = await todo.remove();
    const result = await todo.deleteOne({ _id: taskId }); 
    if (result.deletedCount > 0) {
-      resstatus(200).send('Nhiệm vụ đã được xóa thành công!');
+      res.status(200).send('Nhiệm vụ đã được xóa thành công!');
     } else {
       res.status(404).send('Không tìm thấy nhiệm vụ!');
     }

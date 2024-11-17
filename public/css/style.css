@@ -13,11 +13,13 @@ body {
     text-align: end;
     margin : 0 1rem 0 0; 
     padding : 1rem;
-    color : rgb(94, 133, 94);
+    color : #903a18;
+    font-size: 1.2rem;
 }
 .username {
-    color: rgb(94, 133, 94);;
+    color: #823213;
     font-weight: bold; 
+    text-transform: uppercase;
 }
 h1 {
     text-align: center;
@@ -34,20 +36,20 @@ input[type="text"] {
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 1rem;
 }
 button#addButton {
-    padding: 20px;
+    padding: 10px;
     border: none;
-    background-color: #7ea286;
+    background-color: #f08459;
     color: white;
     border-radius: 4px;
     text-align: center;
     transition: 0.3s;
     cursor: pointer;
+    margin-left: 1rem;
 }
 button#addButton:hover {
-    background-color: #369c4c;
+    background-color: #f08459;
 }
 #myUL {
     list-style: none;
@@ -56,7 +58,7 @@ button#addButton:hover {
     width : 60%;
     margin : 1rem auto;
     z-index: 10;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 #myUL li {
     position: relative;
@@ -96,9 +98,8 @@ button#addButton:hover {
     background-color: #e9ecef;
     color: black;
 }
-#myItem {
-    padding : 1rem;
-    margin : 0 1rem;
-    font-size: 1rem;
-}
-
+/* #logout {
+    color :white;
+    text-align: end;
+    z-index: 1;
+} */
