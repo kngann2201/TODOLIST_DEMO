@@ -1,5 +1,3 @@
-const { create } = require("../../backend/models/Todo");
-
 document.addEventListener('DOMContentLoaded', function() {
   //Welcome
   const name = localStorage.getItem('name');
