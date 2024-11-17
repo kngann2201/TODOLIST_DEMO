@@ -55,4 +55,3 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
 });
 
 
-  

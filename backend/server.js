@@ -44,6 +44,12 @@ app.get('/home.html', (req, res) => {
 app.get('/calendar.html', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'calendar.html'));
 });
+
+// Route cho trang sự kiện
+app.get('/event.html', (req, res) => {
+   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'event.html'));
+});
+
 // Route cho trang start
 app.get('/start.html', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'start.html'));
@@ -66,6 +72,10 @@ app.use('/api/auth', authRoutes);
 //Kết nối todo.js với server.js để sử dụng các routes tương tác nhiệm vụ
 const todoRoutes = require('./todo');
 app.use('/api/todo', todoRoutes);
+
+//Kết nối event.js với server.js để sử dụng các routes tương tác nhiệm vụ
+const eventRoutes = require('./event');
+app.use('/api/event', eventRoutes);
 
 // Thiết lập server lắng nghe tại cổng 5000
 const PORT = 5000;
