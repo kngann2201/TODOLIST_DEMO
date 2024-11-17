@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-var session = require('express-session')
 const cors = require('cors');
 const app = express();
 
@@ -20,13 +19,6 @@ app.use(cors())
 
 // Cấu hình Express để phục vụ các file tĩnh (html,css,js)
 app.use(express.static(path.join(__dirname, '..', 'public')));
-
-//Sử dụng session để kiểm tra login
-app.use(session({
-   secret: 'mySecretKey',
-   resave: true,
-   saveUninitialized: false
- }));
 
 // Route cho trang đăng ký
 app.get('/register.html', (req, res) => {
@@ -61,7 +53,6 @@ app.get('/start.html', (req, res) => {
 app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'start.html'));
 });
-
 
 // Cấu hình route chính để hiển thị khi truy cập vào localhost:5000
 app.get('/', (req, res) => {

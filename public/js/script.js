@@ -1,3 +1,5 @@
+const { create } = require("../../backend/models/Todo");
+
 document.addEventListener('DOMContentLoaded', function() {
   //Welcome
   const name = localStorage.getItem('name');
@@ -67,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const choices = selectElement.options[selectElement.selectedIndex].id;
     console.log(choice);
     li.classList.add(choices);
+    const selectedDate = document.getElementById('date').value;
   // Gửi nhiệm vụ mới lên server để lưu vào MongoDB
     fetch('http://localhost:5000/api/todo/add', {
       method: 'POST',
