@@ -50,13 +50,13 @@ app.get('/event.html', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'event.html'));
 });
 
-// Route cho trang start
-app.get('/start.html', (req, res) => {
-   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'start.html'));
+// Route cho trang nhật kí
+app.get('/diary.html', (req, res) => {
+   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'diary.html'));
 });
 
-// Cấu hình route chính để hiển thị trang bát đầu khi truy cập vào localhost:5000
-app.get('/', (req, res) => {
+// Route cho trang start
+app.get('/start.html', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'start.html'));
 });
 
@@ -77,7 +77,7 @@ app.use('/api/todo', todoRoutes);
 const eventRoutes = require('./event');
 app.use('/api/event', eventRoutes);
 
-//Kết nối event.js với server.js để sử dụng các routes tương tác nhiệm vụ
+//Kết nối diary.js với server.js để sử dụng các routes tương tác nhiệm vụ
 const diaryRoutes = require('./diary');
 app.use('/api/diary', diaryRoutes);
 
