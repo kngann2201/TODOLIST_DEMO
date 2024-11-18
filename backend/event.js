@@ -25,7 +25,8 @@ router.get('/list/:userId', async (req, res) => {
 // Thêm sự kiện mới
 router.post('/add', async (req, res) => {
    try {
-      let { userId, task, completed, filter } = req.body;  
+      // let { userId, task, completed, filter } = req.body;  
+      let { userId, task, completed, filter, createdAt } = req.body; 
       // Kiểm tra người dùng tồn tại
       const user = await User.findById(userId);
       if (!user) {
@@ -35,11 +36,12 @@ router.post('/add', async (req, res) => {
          userId,
          task,
          completed, 
-         filter
+         filter,
+         createdAt
       });
       try {
          const savedEvent = await newEvent.save();  
-         res.status(201).json({ message: 'lưu id thành công!', taskId: savedEvent._id });
+         res.status(201).json({ message: 'lưu id thành công!', taskId: savedEvent._id, date : savedEvent.createdAt });
          // console.log(savedEvent._id);
        } catch (error) {
          console.error('Lỗi khi lưu sự kiện:', error);

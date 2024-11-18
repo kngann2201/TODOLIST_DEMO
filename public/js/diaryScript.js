@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
           throw new Error('Không thể tải sự kiện');
         }
         // console.log('API đã được gửi', response);  // Kiểm tra
-        const diaries = await response.json();
-        // console.log(diaress)   // Kiểm tra
+        const diarys = await response.json();
+        // console.log(diarys)   // Kiểm tra
         const diaryList = document.getElementById('myUL');
         diaryList.innerHTML = ''; 
-        diaries.forEach(task => {
+        diarys.forEach(task => {
             const li = document.createElement("li");
             var y = document.createElement("SPAN");
             y.className = "headlineDiary";

@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Lưu trữ để sử dụng 
                     localStorage.setItem('userId', data.userId);
                     localStorage.setItem('name', data.name);
+                    localStorage.setItem('date', data.createdAt);
                     window.location.href = 'home.html'; 
                 } else {
                     alert(data.message || 'Đã có lỗi xảy ra.');

@@ -48,17 +48,17 @@ select {
 button#addButton {
     padding: 10px;
     border: none;
-    background-color: #f89d73;
+    background-color: #ef855bb7;
     color: white;
     border-radius: 4px;
     text-align: center;
     transition: 0.3s;
     cursor: pointer;
     margin-left: 1rem;
-}
-button#addButton:hover {
-    background-color: #369c4c;
-}
+  }
+  button#addButton:hover {
+    background-color: #f08459;
+  }
 #myUL {
     list-style: none;
     padding: 0;
@@ -89,7 +89,7 @@ button#addButton:hover {
 .close {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 30%;
     transform: translateY(-50%);
     font-size: 20px;
     cursor: pointer;
@@ -99,11 +99,14 @@ button#addButton:hover {
     width : 5%;
     margin : auto;
     text-align: center;
-} 
-.close:hover {
-    background-color: #cd7c5d;
-    color: white;
-}
+    transition : 0.1s;
+  } 
+  .close:hover {
+    /* background-color: #f44336; */
+    color: #f44336;
+    font-size: 1.5rem;
+    top: 20%;
+  }
 #myUL li.completed {
     text-decoration: line-through;
     background-color: #e9ecef;

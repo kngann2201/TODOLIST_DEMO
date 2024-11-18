@@ -5,7 +5,7 @@ const eventSchema = new mongoose.Schema({
    userId: { type: String, ref: 'User', required: true },
    task: { type: String, required: true },
    completed: { type: Boolean},
-   createdAt: { type: Date, default: Date.now },
+   createdAt: { type: Date, default: Date.now, required : true },
    filter: { type: String, default: "Tất cả"}
 });
 

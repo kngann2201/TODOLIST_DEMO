@@ -26,6 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
           events.forEach(task => {
               const li = document.createElement('li');
               li.textContent = task.task;
+              const dateType = new Date(task.createdAt);
+              console.log('task.createdAt:', task.createdAt);
+              console.log('Type of createdAt:', typeof task.createdAt);
+              // li.textContent = task.task + ' ' + dateType.getDate() + '/' + dateType.getMonth() + '/' + dateType.getFullYear();
               li.dataset.taskId = task._id;
               if (task.completed === true) {
                 li.classList.add("completed"); 
@@ -50,28 +54,44 @@ document.addEventListener('DOMContentLoaded', function() {
   
     //Tạo phần tử danh sách mới
     const input = document.getElementById('myInput');
+    const inputDate = document.getElementById('date');
     console.log('id:',userId); //kiểm tra
     function newElement() {
       const inputValue = input.value;
+      const inputDateValue = inputDate.value;
+      // const dateType = new Date(inputDateValue).toISOString();
+      const dateType = new Date(inputDateValue);
+      console.log(dateType);
+      const getDate = dateType.getDate(); 
+      const getMonth = dateType.getMonth() + 1;
+      const getYear = dateType.getFullYear();
+      console.log(`Date: ${getDate}, Month: ${getMonth}, Year: ${getYear}`);
       console.log('inputValue:', inputValue);
       if (!inputValue) {
         alert("Hãy viết nội dung trước khi thêm nhé!");
         return;
       }
+      if (!inputDateValue) {
+        alert("Chọn ngày đã nhé!");
+        return;
+      }
       const li = document.createElement("li");
-      li.textContent = inputValue;
+      // li.textContent = inputValuee;
       const list = document.getElementById("myUL");
       const selectElement = document.getElementById("myItem");
       const choice = selectElement.options[selectElement.selectedIndex].text;
       const choices = selectElement.options[selectElement.selectedIndex].id;
       console.log(choice);
+      const inputValuee = inputValue + ' ' + getDate + '/' + getMonth + '/' + getYear;
+      li.textContent = inputValuee;
       li.classList.add(choices);
-      const selectedDate = document.getElementById('date').value;
     // Gửi sự kiện mới lên server để lưu vào MongoDB
       fetch('http://localhost:5000/api/event/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({ userId: userId, task: inputValue, completed: false, filter: choice }) 
+        body: JSON.stringify({ userId: userId, task: inputValue, completed: false, filter: choice, createdAt : dateType })
+        // body: JSON.stringify({ userId: userId, task: inputValue, completed: false, filter: choice }) 
+
       })
       .then(response => response.json())
       .then(data => {
@@ -79,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log(data);
           console.log('Thêm sự kiện thành công!');
           li.dataset.taskId = data.taskId;
+
       })
       .catch(error => {
           console.error('Lỗi khi thêm sự kiện:', error);
@@ -129,7 +150,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   
     //Đánh dấu mục đã hoàn thành 
-    const list = document.querySelector('ul');
+    const list = document.getElementById('myUL');
+    // console.log(list);
     list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
       ev.target.classList.toggle('completed');

@@ -125,7 +125,7 @@ input[type="text"] {
 button#addButton {
   padding: 10px;
   border: none;
-  background-color: #f08459;
+  background-color: #ef855bb7;
   color: white;
   border-radius: 4px;
   text-align: center;
@@ -154,6 +154,8 @@ button#addButton:hover {
   cursor: pointer;
   transition: 0.2s;
   text-decoration: none;
+  color : black;
+  font-weight: 100;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -163,7 +165,7 @@ button#addButton:hover {
 .close {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%);
   font-size: 20px;
   cursor: pointer;
@@ -173,15 +175,21 @@ button#addButton:hover {
   width : 5%;
   margin : auto;
   text-align: center;
+  transition : 0.1s;
 } 
 .close:hover {
-  background-color: #f44336;
-  color: white;
+  /* background-color: #f44336; */
+  color: #f44336;
+  font-size: 1.5rem;
+  top: 20%;
 }
 #myUL li.completed {
   text-decoration: line-through;
   background-color: #e9ecef;
   color: black;
+}
+select {
+  margin-right: 1rem;
 }
 /* Phần xử lý copy từ home */
 body {
