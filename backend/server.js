@@ -77,6 +77,10 @@ app.use('/api/todo', todoRoutes);
 const eventRoutes = require('./event');
 app.use('/api/event', eventRoutes);
 
+//Kết nối event.js với server.js để sử dụng các routes tương tác nhiệm vụ
+const diaryRoutes = require('./diary');
+app.use('/api/diary', diaryRoutes);
+
 // Thiết lập server lắng nghe tại cổng 5000
 const PORT = 5000;
 app.listen(PORT, () => {
