@@ -6,44 +6,99 @@ document.addEventListener('DOMContentLoaded', function() {
   // const contentId = localStorage.getItem('contentId');
   console.log(name); //kiểm tra
   document.getElementById("name").innerHTML = `${name}`;
-  // Lấy danh sách sự kiện từ server
-  async function loadTasks() {
-    if (!userId) {
-        alert('Vui lòng đăng nhập!');
-        window.location.href = 'login.html';
-        return;
-    }
-    // console.log('Đang gửi yêu cầu API để tải sự kiện...');  // Kiểm tra 
-    try {
-        const response = await fetch(`http://localhost:5000/api/diary/list/${userId}`);
-        if (!response.ok) {
-          throw new Error('Không thể tải sự kiện');
+  //Lấy ngày được click trên lịch
+  const daysli = document.querySelectorAll(".days > li");
+  daysli.forEach(day => {
+    day.addEventListener('click', function () {
+      daysli.forEach(item => item.classList.remove("selectedDay"));
+      this.classList.add("selectedDay");
+      console.log(this);
+      const d = this.innerText;
+      console.log(d);
+    // Lấy danh sách sự kiện từ server
+      async function loadTasks() {
+        if (!userId) {
+            alert('Vui lòng đăng nhập!');
+            window.location.href = 'login.html';
+            return;
         }
-        // console.log('API đã được gửi', response);  // Kiểm tra
-        const diarys = await response.json();
-        // console.log(diarys)   // Kiểm tra
-        const diaryList = document.getElementById('myUL');
-        diaryList.innerHTML = ''; 
-        diarys.forEach(task => {
-            const li = document.createElement("li");
-            var y = document.createElement("SPAN");
-            y.className = "headlineDiary";
-            y.textContent = task.task;
-            li.appendChild(y);
-            var z = document.createElement("TEXTAREA");
-            z.value= task.content;
-            z.className = "contentDiary";
-            li.appendChild(z);
-            li.dataset.taskId = task._id;
-            // li.dataset.contentId = content._id;
-            diaryList.appendChild(li);
-            addCloseButton(li);
-        });
-    } catch (error) {
-        alert('Lỗi khi tải sự kiện!');
-    }
-  }
-  loadTasks();
+        // console.log('Đang gửi yêu cầu API để tải sự kiện...');  // Kiểm tra 
+        try {
+            const response = await fetch(`http://localhost:5000/api/diary/list/${userId}`);
+            if (!response.ok) {
+              throw new Error('Không thể tải sự kiện');
+            }
+            // console.log('API đã được gửi', response);  // Kiểm tra
+            const diaries = await response.json();
+            // console.log(diaries)   // Kiểm tra
+            const diaryList = document.getElementById('myUL');
+            diaryList.innerHTML = ''; 
+            diaries.forEach(task => { 
+              const dateType = new Date(task.createdAt);
+              console.log(dateType.getDate());
+              if (dateType.getDate()==d)
+              {            
+                const li = document.createElement("li");
+                var y = document.createElement("SPAN");
+                y.className = "headlineDiary";
+                y.textContent = task.task;
+                li.appendChild(y);
+                var z = document.createElement("TEXTAREA");
+                z.value= task.content;
+                z.className = "contentDiary";
+                li.appendChild(z);
+                li.dataset.taskId = task._id;
+                // li.dataset.contentId = content._id;
+                diaryList.appendChild(li);
+                addCloseButton(li); 
+              }  
+            });
+        } catch (error) {
+            alert('Không có nhật ký nào được tìm thấy, hãy thử ngày khác nhé!');
+        }
+      }
+      loadTasks();
+    });
+  });
+
+  // // Lấy danh sách sự kiện từ server
+  // async function loadTasks() {
+  //   if (!userId) {
+  //       alert('Vui lòng đăng nhập!');
+  //       window.location.href = 'login.html';
+  //       return;
+  //   }
+  //   // console.log('Đang gửi yêu cầu API để tải sự kiện...');  // Kiểm tra 
+  //   try {
+  //       const response = await fetch(`http://localhost:5000/api/diary/list/${userId}`);
+  //       if (!response.ok) {
+  //         throw new Error('Không thể tải sự kiện');
+  //       }
+  //       // console.log('API đã được gửi', response);  // Kiểm tra
+  //       const diarys = await response.json();
+  //       // console.log(diarys)   // Kiểm tra
+  //       const diaryList = document.getElementById('myUL');
+  //       diaryList.innerHTML = ''; 
+  //       diarys.forEach(task => {
+  //           const li = document.createElement("li");
+  //           var y = document.createElement("SPAN");
+  //           y.className = "headlineDiary";
+  //           y.textContent = task.task;
+  //           li.appendChild(y);
+  //           var z = document.createElement("TEXTAREA");
+  //           z.value= task.content;
+  //           z.className = "contentDiary";
+  //           li.appendChild(z);
+  //           li.dataset.taskId = task._id;
+  //           // li.dataset.contentId = content._id;
+  //           diaryList.appendChild(li);
+  //           addCloseButton(li);
+  //       });
+  //   } catch (error) {
+  //       alert('Lỗi khi tải sự kiện!');
+  //   }
+  // }
+  // loadTasks();
 
   //Tạo phần tử danh sách mới
   const input = document.getElementById('myInput');
@@ -54,8 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputValue = input.value;
     const inputDiaryValue = inputDiary.value;
     const inputDateValue = inputDate.value;
+    const dateType = new Date(inputDateValue);
     console.log('inputValue:', inputValue);
-    console.log('inputDiary:', inputDiaryValue);
+    console.log('inputDate:', inputDateValue);
+    console.log('inputDateType:', dateType);
     if (!inputValue) {
       alert("Hãy viết nội dung trước khi thêm nhé!");
       return;
@@ -78,12 +135,11 @@ document.addEventListener('DOMContentLoaded', function() {
     x.value = inputDiaryValue;
     li.appendChild(x);
     const list = document.getElementById("myUL");
-    const selectedDate = document.getElementById('date').value;
   // Gửi sự kiện mới lên server để lưu vào MongoDB
     fetch('http://localhost:5000/api/diary/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({ userId: userId, task: inputValue, content : inputDiaryValue }) 
+      body: JSON.stringify({ userId: userId, task: inputValue, content : inputDiaryValue, createdAt: dateType }) 
     })
     .then(response => response.json())
     .then(data => {

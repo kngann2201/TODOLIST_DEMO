@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 
 // Cấu hình Body-Parser
@@ -14,8 +14,8 @@ mongoose.connect('mongodb://localhost:27017/demo', { useNewUrlParser: true, useU
    .then(() => console.log("Kết nối MongoDB thành công!"))
    .catch(err => console.error("Không thể kết nối MongoDB:", err));
    
-// Sử dụng CORS (Cross-Origin Resource Sharing)
-app.use(cors())
+// // Sử dụng CORS (Cross-Origin Resource Sharing)
+// app.use(cors())
 
 // Cấu hình Express để phục vụ các file tĩnh (html,css,js)
 app.use(express.static(path.join(__dirname, '..', 'public')));

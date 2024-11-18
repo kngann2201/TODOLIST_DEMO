@@ -5,53 +5,67 @@ document.addEventListener('DOMContentLoaded', function() {
     const taskId = localStorage.getItem('taskId');
     console.log(name); //kiểm tra
     document.getElementById("name").innerHTML = `${name}`;
-    // Lấy danh sách sự kiện từ server
-    async function loadTasks() {
-      if (!userId) {
-          alert('Vui lòng đăng nhập!');
-          window.location.href = 'login.html';
-          return;
-      }
-      // console.log('Đang gửi yêu cầu API để tải sự kiện...');  // Kiểm tra 
-      try {
-          const response = await fetch(`http://localhost:5000/api/event/list/${userId}`);
-          if (!response.ok) {
-            throw new Error('Không thể tải sự kiện');
+
+    //Lấy ngày được click trên lịch
+    // const days = document.querySelector(".days");
+    // console.log(days);
+    const daysli = document.querySelectorAll(".days > li");
+    daysli.forEach(day => {
+      day.addEventListener('click', function () {
+        daysli.forEach(item => item.classList.remove("selectedDay"));
+        this.classList.add("selectedDay");
+        console.log(this);
+        const d = this.innerText;
+        console.log(d);
+      // Lấy danh sách sự kiện từ server
+        async function loadTasks() {
+          if (!userId) {
+              alert('Vui lòng đăng nhập!');
+              window.location.href = 'login.html';
+              return;
           }
-          // console.log('API đã được gửi', response);  // Kiểm tra
-          const events = await response.json();
-          // console.log(events)   // Kiểm tra
-          const eventList = document.getElementById('myUL');
-          eventList.innerHTML = ''; 
-          events.forEach(task => {
-              const li = document.createElement('li');
-              li.textContent = task.task;
-              const dateType = new Date(task.createdAt);
-              console.log('task.createdAt:', task.createdAt);
-              console.log('Type of createdAt:', typeof task.createdAt);
-              // li.textContent = task.task + ' ' + dateType.getDate() + '/' + dateType.getMonth() + '/' + dateType.getFullYear();
-              li.dataset.taskId = task._id;
-              if (task.completed === true) {
-                li.classList.add("completed"); 
+          // console.log('Đang gửi yêu cầu API để tải sự kiện...');  // Kiểm tra 
+          try {
+              const response = await fetch(`http://localhost:5000/api/event/list/${userId}`);
+              if (!response.ok) {
+                throw new Error('Không thể tải sự kiện');
               }
-              const selectElement = document.getElementById("myItem");
-              let classF = null;
-              for (let option of selectElement.options) {
-                if (option.value === task.filter) {
-                    classF = option.id; 
-                    break; 
-                }
-              }
-              li.classList.add(classF);
-              eventList.appendChild(li);
-              addCloseButton(li);
-          });
-      } catch (error) {
-          alert('Lỗi khi tải sự kiện!');
-      }
-    }
-    loadTasks();
-  
+              // console.log('API đã được gửi', response);  // Kiểm tra
+              const events = await response.json();
+              // console.log(events)   // Kiểm tra
+              const eventList = document.getElementById('myUL');
+              eventList.innerHTML = ''; 
+              events.forEach(task => { 
+                const dateType = new Date(task.createdAt);
+                if (dateType.getDate()==d)
+                {            
+                  const li = document.createElement('li');
+                  li.textContent = task.task;
+                  li.dataset.taskId = task._id;
+                  if (task.completed === true) {
+                    li.classList.add("completed"); 
+                  }
+                  const selectElement = document.getElementById("myItem");
+                  let classF = null;
+                  for (let option of selectElement.options) {
+                    if (option.value === task.filter) {
+                        classF = option.id; 
+                        break; 
+                    }
+                  }
+                  li.classList.add(classF);
+                  eventList.appendChild(li);
+                  addCloseButton(li);
+                }   
+              });
+          } catch (error) {
+              alert('Không có sự kiện nào được tìm thấy, hãy thử ngày khác nhé!');
+          }
+        }
+        loadTasks();
+      });
+    });
+
     //Tạo phần tử danh sách mới
     const input = document.getElementById('myInput');
     const inputDate = document.getElementById('date');
@@ -76,14 +90,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       const li = document.createElement("li");
-      // li.textContent = inputValuee;
+      li.textContent = inputValue;
       const list = document.getElementById("myUL");
       const selectElement = document.getElementById("myItem");
       const choice = selectElement.options[selectElement.selectedIndex].text;
       const choices = selectElement.options[selectElement.selectedIndex].id;
       console.log(choice);
-      const inputValuee = inputValue + ' ' + getDate + '/' + getMonth + '/' + getYear;
-      li.textContent = inputValuee;
+      // const inputValuee = inputValue + ' ' + getDate + '/' + getMonth + '/' + getYear;
+      // li.textContent = inputValuee;
       li.classList.add(choices);
     // Gửi sự kiện mới lên server để lưu vào MongoDB
       fetch('http://localhost:5000/api/event/add', {
@@ -182,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
     }, false);
-  
+    
     console.log('DOM is ready');
   });
   

@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/list/:userId', async (req, res) => {
    try {
       const { userId } = req.params;
-      const tasks = await Diary.find({ userId }).select('task content filter').sort({ createdAt: -1 });
+      const tasks = await Diary.find({ userId }).select('task content createdAt').sort({ createdAt: -1 });
       // Kiểm tra nếu không có sự kiện
       if (tasks.length === 0) {
          console.log('Không có sự kiện nào được tìm thấy cho userId:', userId);
@@ -25,7 +25,7 @@ router.get('/list/:userId', async (req, res) => {
 // Thêm sự kiện mới
 router.post('/add', async (req, res) => {
    try {
-      let { userId, task, content } = req.body;  
+      let { userId, task, content, createdAt } = req.body;  
       // Kiểm tra người dùng tồn tại
       const user = await User.findById(userId);
       if (!user) {
@@ -34,11 +34,12 @@ router.post('/add', async (req, res) => {
       const newDiary = new Diary({
          userId,
          task,
-         content
+         content,
+         createdAt
       });
       try {
          const savedDiary = await newDiary.save();  
-         res.status(201).json({ message: 'lưu id thành công!', taskId: savedDiary._id });
+         res.status(201).json({ message: 'lưu id thành công!', taskId: savedDiary._id, date : savedDiary.createdAt });
          // console.log(savedDiary._id);
        } catch (error) {
          console.error('Lỗi khi lưu sự kiện:', error);
