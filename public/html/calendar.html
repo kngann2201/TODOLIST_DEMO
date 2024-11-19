@@ -5,12 +5,15 @@
     <link rel="shortcut icon" href="../img/download__8_-removebg.png">
     <title>Mèo Meo List - Lịch</title>
     <link rel="stylesheet" href="../css/calendar.css">
+    <link rel="stylesheet" href="../css/today.css">
+    <!-- <link rel="stylesheet" href="../css/index.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/45371830ed.js" crossorigin="anonymous"></script>
     <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <script src="../js/calendar.js" defer></script>
     <script src="../js/calendar2.js" defer></script>
+    <script src="../js/script.js" defer></script>
   </head>
   <body>
     <!-- Phần nội dung bên trái -->
@@ -38,10 +41,23 @@
         </div>
       </div>
       <!-- Phần hiện nội dung bên dưới -->
-      <div class="wrapper">
-          <ul id="myEventsUL" id="myUL"></ul>
-          <ul id="myTodosUL" id = "myUL"></ul>
-      </div>
+      <section class="left">
+        <!-- <h1>To-Do List</h1> -->
+        <div id="taskForm" class="input-form">
+          <input type="text" id="myInput" placeholder="Add a new task">
+          <select id="myItem">
+            <option id ='all'>Tất cả</option>
+            <option id = 'study'>Học tập</option>
+            <option id = 'goout'>Đi chơi</option>
+            <option id = 'hasTodo'>Việc cần làm</option>
+          </select>
+          <input type = "date" id = "date">
+          <button id="addButton">Add</button>
+        </div>
+        <ul id="myUL">
+          <li>Make a to-do list today</li>
+        </ul>
+      </section>
     </section>
     <!-- Phần menu bên phải -->
   <section class="right">
