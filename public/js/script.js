@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         todos.forEach(task => {
             const dateType = new Date(task.createdAt);
             const li = document.createElement('li');
-            li.textContent = task.task + ' ' + dateType.getDate() + '/' + dateType.getMonth();
+            li.textContent = task.task + ' ' + dateType.getDate() + '/' + (dateType.getMonth()+1);
             li.dataset.taskId = task._id;
             if (task.completed === true) {
               li.classList.add("completed"); 
