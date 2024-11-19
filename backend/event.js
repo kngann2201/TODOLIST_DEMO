@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/list/:userId', async (req, res) => {
    try {
       const { userId } = req.params;
-      const tasks = await Event.find({ userId }).select('task completed createdAt filter').sort({ createdAt: -1 });
+      const tasks = await Event.find({ userId }).select('task completed createdAt filter').sort({ createdAt: 1 });
       // Kiểm tra nếu không có sự kiện
       if (tasks.length === 0) {
          console.log('Không có sự kiện nào được tìm thấy cho userId:', userId);

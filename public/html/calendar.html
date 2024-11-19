@@ -10,7 +10,7 @@
     <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <script src="../js/calendar.js" defer></script>
-    <script src="../js/script.js" defer></script>
+    <script src="../js/calendar2.js" defer></script>
   </head>
   <body>
     <!-- Phần nội dung bên trái -->
@@ -39,21 +39,8 @@
       </div>
       <!-- Phần hiện nội dung bên dưới -->
       <div class="wrapper">
-        <div class="under">
-          <div id="taskForm" class="input-form">
-            <input type="text" id="myInput" placeholder="Add a new task">
-            <select id="myItem">
-              <option id ='all'>Tất cả</option>
-              <option id = 'diary'>Nhật kí</option>
-              <option id = 'event'>Sự kiện</option>
-              <option id = 'hasTodo'>Việc cần làm</option>
-            </select>
-            <button id="addButton">Add</button>
-          </div>
-          <ul id="myUL">
-            <li>Make a to-do list today</li>
-          </ul>
-        </div>
+          <ul id="myEventsUL" id="myUL"></ul>
+          <ul id="myTodosUL" id = "myUL"></ul>
       </div>
     </section>
     <!-- Phần menu bên phải -->
@@ -76,9 +63,9 @@
         <span class="menuBig">CÔNG VIỆC</span>
         <ul class="menuSmall">
           <li>
-            <a href="" id ="today-todo">
+            <a href="today.html" id ="today-todo">
               <i class="fa-solid fa-bars"></i>
-              <span>Lịch trình hôm nay</span>
+              <span>Công việc hôm nay</span>
             </a>
           </li>
           <li>

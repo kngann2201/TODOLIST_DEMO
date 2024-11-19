@@ -25,8 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const todoList = document.getElementById('myUL');
         todoList.innerHTML = ''; 
         todos.forEach(task => {
+            const dateType = new Date(task.createdAt);
             const li = document.createElement('li');
-            li.textContent = task.task;
+            li.textContent = task.task + ' ' + dateType.getDate() + '/' + dateType.getMonth();
             li.dataset.taskId = task._id;
             if (task.completed === true) {
               li.classList.add("completed"); 
@@ -51,28 +52,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
   //Tạo phần tử danh sách mới
   const input = document.getElementById('myInput');
+  const inputDate = document.getElementById('date');
   console.log('id:',userId); //kiểm tra
   function newElement() {
     const inputValue = input.value;
+    const inputDateValue = inputDate.value;
+    const dateType = new Date(inputDateValue);
     console.log('inputValue:', inputValue);
+    const getDay = dateType.getDate(); 
+    const getMonth = dateType.getMonth() + 1;
+    const getYear = dateType.getFullYear();
+    console.log(`Date: ${getDay}, Month: ${getMonth}, Year: ${getYear}`)
     if (!inputValue) {
       alert("Hãy viết nội dung trước khi thêm nhé!");
       return;
     }
+    if (!inputDateValue) {
+      alert("Chọn ngày đã nhé!");
+      return;
+    }
     const li = document.createElement("li");
-    li.textContent = inputValue;
+    li.textContent = inputValue + ' ' + getDay + '/' + getMonth;
     const list = document.getElementById("myUL");
     const selectElement = document.getElementById("myItem");
     const choice = selectElement.options[selectElement.selectedIndex].text;
     const choices = selectElement.options[selectElement.selectedIndex].id;
     console.log(choice);
     li.classList.add(choices);
-    const selectedDate = document.getElementById('date').value;
+    // const selectedDate = document.getElementById('date').value;
   // Gửi nhiệm vụ mới lên server để lưu vào MongoDB
     fetch('http://localhost:5000/api/todo/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({ userId: userId, task: inputValue, completed: false, filter: choice }) 
+      body: JSON.stringify({ userId: userId, task: inputValue, completed: false, filter: choice, createdAt: dateType }) 
     })
     .then(response => response.json())
     .then(data => {

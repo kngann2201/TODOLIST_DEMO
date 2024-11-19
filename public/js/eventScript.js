@@ -76,10 +76,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // const dateType = new Date(inputDateValue).toISOString();
       const dateType = new Date(inputDateValue);
       console.log(dateType);
-      const getDate = dateType.getDate(); 
-      const getMonth = dateType.getMonth() + 1;
-      const getYear = dateType.getFullYear();
-      console.log(`Date: ${getDate}, Month: ${getMonth}, Year: ${getYear}`);
+      // const getDate = dateType.getDate(); 
+      // const getMonth = dateType.getMonth() + 1;
+      // const getYear = dateType.getFullYear();
+      // console.log(`Date: ${getDate}, Month: ${getMonth}, Year: ${getYear}`);
       console.log('inputValue:', inputValue);
       if (!inputValue) {
         alert("Hãy viết nội dung trước khi thêm nhé!");

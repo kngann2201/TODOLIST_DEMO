@@ -4,19 +4,20 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" href="../img/download__8_-removebg.png">
     <title>Mèo Meo List - Lịch</title>
-    <link rel="stylesheet" href="../css/calendar.css">
+    <!-- <link rel="stylesheet" href="../css/calendar.css"> -->
+    <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/45371830ed.js" crossorigin="anonymous"></script>
     <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <script src="../js/calendar.js" defer></script>
-    <script src="../js/eventScript.js" defer></script>
+    <!-- <script src="../js/calendar.js" defer></script> -->
+    <script src="../js/today.js" defer></script>
   </head>
   <body>
     <!-- Phần nội dung bên trái -->
     <section class="left">
       <!-- Phần lịch phía trên -->
-      <div class="wrapper">
+      <!-- <div class="wrapper">
         <header>
           <p class="current-date"></p>
           <div class="icons">
@@ -36,26 +37,24 @@
           </ul>
           <ul class="days"></ul>
         </div>
-      </div>
+      </div> -->
       <!-- Phần hiện nội dung bên dưới -->
       <div class="wrapper">
         <div class="under">
-            <span id = "selectDay"></span>
-            <div id="taskForm" class="input-form">
-            <input type="text" id="myInput" placeholder="Add a new task">
-            <select id="myItem">
-                <option id ='all'>Tất cả</option>
-                <option id = 'birthday'>Sinh nhật</option>
-                <option id = 'schedule'>Lịch trình</option>
-                <option id = 'holiday'>Lễ</option>
-            </select>
-            <input type = "date" id = "date">
-            <button id="addButton">Add</button>
-            </div>
-            <ul id="myUL">
-            </ul>
+          <h1>CÔNG VIỆC HÔM NAY</h1>
+          <select id="myItem">
+            <option id ='all'>Tất cả</option>
+            <option id = 'study'>Học tập</option>
+            <option id = 'goout'>Đi chơi</option>
+            <option id = 'hasTodo'>Việc cần làm</option>
+            <option id = 'birthday'>Sinh nhật</option>
+            <option id = 'schedule'>Lịch trình</option>
+            <option id = 'holiday'>Lễ</option>
+          </select>
+          <ul id="myUL">
+          </ul>
         </div>
-        </div>
+      </div>
     </section>
     <!-- Phần menu bên phải -->
   <section class="right">

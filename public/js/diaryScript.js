@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!inputDateValue) {
       alert("Chọn ngày đã nhé!");
       return;
-    }
+    }// 
     const li = document.createElement("li");
     var span = document.createElement("SPAN");
     span.className = "headlineDiary";

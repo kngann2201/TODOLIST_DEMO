@@ -139,6 +139,13 @@ button#addButton {
 button#addButton:hover {
   background-color: #f08459;
 }
+/* select {
+  padding : 1rem;
+  width : 50%;
+  margin : 0 25%;
+  box-sizing: border-box;
+  border : 1px solid rgba(128, 128, 128, 0.685);
+} */
 #myUL {
   list-style: none;
   padding: 0;
@@ -151,12 +158,13 @@ button#addButton:hover {
 #myUL li {
   position: relative;
   padding: 10px;
-  background-color: #f8f9fa;
+  background-color: white;
   margin-bottom: 10px;
   border-radius: 4px;
   cursor: pointer;
   transition: 0.2s;
   text-decoration: none;
+  border : 1px solid gray;
   color : black;
   font-weight: 100;
 
