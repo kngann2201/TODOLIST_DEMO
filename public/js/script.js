@@ -7,15 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("name").innerHTML = `${name}`;
   // document.getElementById("loginUser").innerHTML = `Chào mừng <span class="username">${name}</span>, hãy lập To-do list ngày hôm nay nhé!`;
   // Lấy danh sách nhiệm vụ từ server
-  const daysli = document.querySelectorAll(".days > li");
-    daysli.forEach(day => {
-      day.addEventListener('click', function () {
-        daysli.forEach(item => item.classList.remove("selectedDay"));
-        this.classList.add("selectedDay");
-        console.log(this);
-        const d = this.innerText;
-        console.log(d);
-           
   async function loadTasks() {
     if (!userId) {
         alert('Vui lòng đăng nhập!');
@@ -34,11 +25,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const todoList = document.getElementById('myUL');
         todoList.innerHTML = ''; 
         todos.forEach(task => {
-          const dateType = new Date(task.createdAt);
-          if (dateType.getDate()==d)
-          { 
+            const dateType = new Date(task.createdAt);
             const li = document.createElement('li');
-            li.textContent = task.task;
+            var y = document.createElement("SPAN");
+                y.className = "taskToday";
+                y.textContent = task.task;
+                li.appendChild(y);
+                var z = document.createElement("SPAN");
+                z.className = "dateToday";
+                z.textContent = dateType.getDate() + '/' + (dateType.getMonth() +1);
+                li.appendChild(z);
+                var u = document.createElement("SPAN");
+                u.className = "filterToday";
+                u.textContent = task.filter;
+                li.appendChild(u);
             li.dataset.taskId = task._id;
             if (task.completed === true) {
               li.classList.add("completed"); 
@@ -54,15 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
             li.classList.add(classF);
             todoList.appendChild(li);
             addCloseButton(li);
-          }
         });
     } catch (error) {
         alert('Lỗi khi tải nhiệm vụ!!');
     }
   }
   loadTasks();
-});
- });
 
   //Tạo phần tử danh sách mới
   const input = document.getElementById('myInput');
@@ -86,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     const li = document.createElement("li");
-    li.textContent = inputValue;
+    li.textContent = inputValue + ' ' + getDay + '/' + getMonth;
     const list = document.getElementById("myUL");
     const selectElement = document.getElementById("myItem");
     const choice = selectElement.options[selectElement.selectedIndex].text;
