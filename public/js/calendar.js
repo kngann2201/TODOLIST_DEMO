@@ -52,5 +52,11 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         renderCalendar(); // calling renderCalendar function
     });
 });
-
-
+document.addEventListener('DOMContentLoaded', function () {
+//Welcome
+        const name = localStorage.getItem('name');
+        const userId = localStorage.getItem('userId');
+        const taskId = localStorage.getItem('taskId');
+        console.log(name); //kiểm tra
+        document.getElementById("name").innerHTML = `${name}`;
+});

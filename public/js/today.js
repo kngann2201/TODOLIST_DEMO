@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const taskId = localStorage.getItem('taskId');
     console.log(name); //kiểm tra
     document.getElementById("name").innerHTML = `${name}`;
-    // document.getElementById("loginUser").innerHTML = `Chào mừng <span class="username">${name}</span>, hãy lập To-do list ngày hôm nay nhé!`;
     // Lấy danh sách nhiệm vụ từ server
     async function loadTasks() {
       if (!userId) {
@@ -23,14 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
           const todos = await response.json();
           // console.log(todos)   // Kiểm tra
           const todoList = document.getElementById('myUL');
-          const today = Date.now();
-          console.log(today);
-          console.log(dateType);
+          const today = new Date();
+          console.log(today.getDate());
           todoList.innerHTML = ''; 
           todos.forEach(task => {
               const dateType = new Date(task.createdAt);
-              console.log(dateType);
-              if (dateType == today)
+              console.log(dateType.getDate());
+              if (dateType.getDate() == today.getDate())
               {
                 const li = document.createElement('li');
                 li.textContent = task.task;
@@ -38,15 +36,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (task.completed === true) {
                     li.classList.add("completed"); 
                 }
-                const selectElement = document.getElementById("myItem");
-                let classF = null;
-                for (let option of selectElement.options) {
-                    if (option.value === task.filter) {
-                        classF = option.id; 
-                        break; 
-                    }
-                }
-                li.classList.add(classF);
+                // const selectElement = document.getElementById("myItem");
+                // let classF = null;
+                // for (let option of selectElement.options) {
+                //     if (option.value === task.filter) {
+                //         classF = option.id; 
+                //         break; 
+                //     }
+                // }
+                // li.classList.add(classF);
                 todoList.appendChild(li);
                 addCloseButton(li);
               }
