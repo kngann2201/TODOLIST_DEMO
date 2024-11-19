@@ -37,15 +37,15 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (task.completed === true) {
                     li.classList.add("completed"); 
                 }
-                const selectElement = document.getElementById("myItem");
+                // const selectElement = document.getElementById("myItem");
                 let classF = null;
-                for (let option of selectElement.options) {
-                    if (option.value === task.filter) {
-                        classF = option.id; 
-                        break; 
-                    }
-                }
-                li.classList.add(classF);
+                // for (let option of selectElement.options) {
+                //     if (option.value === task.filter) {
+                //         classF = option.id; 
+                //         break; 
+                //     }
+                // }
+              li.classList.add(classF);
               todoList.appendChild(li);
               addCloseButton(li);
             }
@@ -55,61 +55,115 @@ document.addEventListener('DOMContentLoaded', async function() {
       }
     }
     loadTasks();
-    var selected = document.getElementById('myItem');
-    const clic = document.querySelectorAll("#myItem>option");
-    for (let i of clic)
-    {
-    i.onclick = async function(){
-      console.log(this.value);
-      try { 
-        const response = await fetch(`http://localhost:5000/api/todo/list/${userId}`);
-        if (!response.ok) {
-          throw new Error('Không thể tải nhiệm vụ');
-        }
-        // console.log('API đã được gửi', response);  // Kiểm tra
-        const todos = await response.json();
-        // console.log(todos)   // Kiểm tra
-        const todoList = document.getElementById('myUL');
-        const today = new Date();
-        // console.log(today.getDate());
-        todoList.innerHTML = ''; 
-        todos.forEach(task => {
-            const dateType = new Date(task.createdAt);
-            if (dateType.getDate() == today.getDate()){
-              const li = document.createElement('li');
-              // li.textContent = task.task;
-              li.textContent = task.task + ' ' + dateType.getDate() + '/' + (dateType.getMonth() +1);
-              li.dataset.taskId = task._id;
-              if (task.completed === true) {
-                  li.classList.add("completed"); 
-              }
-              const selectElement = document.getElementById("myItem");
-              let classF = null;
-              for (let option of selectElement.options) {
-                  if (option.value === task.filter) {
-                      classF = option.id; 
-                      break; 
-                  }
-              }
-              li.classList.add(classF);
-              if (i.value !== "Tất cả") {
-                if (task.filter === i.value)
-                {
-                  todoList.appendChild(li);
-                  addCloseButton(li);
-                }
-              }
-              else{
-                todoList.appendChild(li);
-                addCloseButton(li);
-              }
-            }
-        });
-      }catch (error) {
-        alert('Lỗi khi tải nhiệm vụ!!?????');
-    }
-  }
-}
+//     var selected = document.getElementById('myItem');
+//     const clic = document.querySelectorAll("#myItem>option");
+//     for (let i of clic)
+//     {
+//     i.onclick = async function(){
+//       console.log(this.value);
+//       try { 
+//         const response = await fetch(`http://localhost:5000/api/todo/list/${userId}`);
+//         if (!response.ok) {
+//           throw new Error('Không thể tải nhiệm vụ');
+//         }
+//         // console.log('API đã được gửi', response);  // Kiểm tra
+//         const todos = await response.json();
+//         // console.log(todos)   // Kiểm tra
+//         const todoList = document.getElementById('myUL');
+//         const today = new Date();
+//         // console.log(today.getDate());
+//         todoList.innerHTML = ''; 
+//         todos.forEach(task => {
+//             const dateType = new Date(task.createdAt);
+//             if (dateType.getDate() == today.getDate()){
+//               const li = document.createElement('li');
+//               // li.textContent = task.task;
+//               li.textContent = task.task + ' ' + dateType.getDate() + '/' + (dateType.getMonth() +1);
+//               li.dataset.taskId = task._id;
+//               if (task.completed === true) {
+//                   li.classList.add("completed"); 
+//               }
+//               const selectElement = document.getElementById("myItem");
+//               let classF = null;
+//               for (let option of selectElement.options) {
+//                   if (option.value === task.filter) {
+//                       classF = option.id; 
+//                       break; 
+//                   }
+//               }
+//               li.classList.add(classF);
+//               if (i.value !== "Tất cả") {
+//                 if (task.filter === i.value)
+//                 {
+//                   todoList.appendChild(li);
+//                   addCloseButton(li);
+//                 }
+//               }
+//               else{
+//                 todoList.appendChild(li);
+//                 addCloseButton(li);
+//               }
+//             }
+//         });
+//       }catch (error) {var selected = document.getElementById('myItem');
+//     const clic = document.querySelectorAll("#myItem>option");
+//     for (let i of clic)
+//     {
+//     i.onclick = async function(){
+//       console.log(this.value);
+//       try { 
+//         const response = await fetch(`http://localhost:5000/api/todo/list/${userId}`);
+//         if (!response.ok) {
+//           throw new Error('Không thể tải nhiệm vụ');
+//         }
+//         // console.log('API đã được gửi', response);  // Kiểm tra
+//         const todos = await response.json();
+//         // console.log(todos)   // Kiểm tra
+//         const todoList = document.getElementById('myUL');
+//         const today = new Date();
+//         // console.log(today.getDate());
+//         todoList.innerHTML = ''; 
+//         todos.forEach(task => {
+//             const dateType = new Date(task.createdAt);
+//             if (dateType.getDate() == today.getDate()){
+//               const li = document.createElement('li');
+//               // li.textContent = task.task;
+//               li.textContent = task.task + ' ' + dateType.getDate() + '/' + (dateType.getMonth() +1);
+//               li.dataset.taskId = task._id;
+//               if (task.completed === true) {
+//                   li.classList.add("completed"); 
+//               }
+//               const selectElement = document.getElementById("myItem");
+//               let classF = null;
+//               for (let option of selectElement.options) {
+//                   if (option.value === task.filter) {
+//                       classF = option.id; 
+//                       break; 
+//                   }
+//               }
+//               li.classList.add(classF);
+//               if (i.value !== "Tất cả") {
+//                 if (task.filter === i.value)
+//                 {
+//                   todoList.appendChild(li);
+//                   addCloseButton(li);
+//                 }
+//               }
+//               else{
+//                 todoList.appendChild(li);
+//                 addCloseButton(li);
+//               }
+//             }
+//         });
+//       }catch (error) {
+//         alert('Lỗi khi tải nhiệm vụ!!?????');
+//     }
+//   }
+// }
+//         alert('Lỗi khi tải nhiệm vụ!!?????');
+//     }
+//   }
+// }
     // const selected = document.getElementById('myItem');
     // selected.onclick = funtion()
     // {
