@@ -32,7 +32,19 @@ document.addEventListener('DOMContentLoaded', async function() {
               {
                 const li = document.createElement('li');
                 // li.textContent = task.task;
-                li.textContent = task.task + ' ' + dateType.getDate() + '/' + (dateType.getMonth() +1);
+                var y = document.createElement("SPAN");
+                y.className = "taskToday";
+                y.textContent = task.task;
+                li.appendChild(y);
+                var z = document.createElement("SPAN");
+                z.className = "dateToday";
+                z.textContent = dateType.getDate() + '/' + (dateType.getMonth() +1);
+                li.appendChild(z);
+                var u = document.createElement("SPAN");
+                u.className = "filterToday";
+                u.textContent = task.filter;
+                li.appendChild(u);
+                // li.textContent = task.task + ' ' + dateType.getDate() + '/' + (dateType.getMonth() +1) + '             ( ' + task.filter + ' )' ;
                 li.dataset.taskId = task._id;
                 if (task.completed === true) {
                     li.classList.add("completed"); 

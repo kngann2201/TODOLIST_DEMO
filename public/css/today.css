@@ -1,0 +1,12 @@
+.dateToday{
+    margin-left: 50px;
+    padding: 3px;
+    background-color: #ff8488a8;
+    border-radius: 5px;
+}
+.filterToday{
+    margin-left: 50px;
+    padding: 3px;
+    background-color: #ffa07a86;
+    border-radius: 5px;
+}

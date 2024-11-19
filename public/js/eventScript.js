@@ -94,7 +94,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (dateType.getDate()==d)
                 {            
                   const li = document.createElement('li');
-                  li.textContent = task.task;
+                  var y = document.createElement("SPAN");
+                y.className = "taskToday";
+                y.textContent = task.task;
+                li.appendChild(y);
+                var u = document.createElement("SPAN");
+                u.className = "filterToday";
+                u.textContent = task.filter;
+                li.appendChild(u);
                   li.dataset.taskId = task._id;
                   if (task.completed === true) {
                     li.classList.add("completed"); 
