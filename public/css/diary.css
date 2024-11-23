@@ -239,8 +239,8 @@ textarea {
 }
 .close {
   position: absolute;
-  right: 10px;
-  top: 30%;
+  right : 18px;
+  top: 29%;
   transform: translateY(-50%);
   font-size: 20px;
   cursor: pointer;
@@ -250,13 +250,13 @@ textarea {
   width : 5%;
   margin : auto;
   text-align: center;
-  transition : 0.1s;
+  transition : 0.1s;display: block;
 } 
 .close:hover {
   /* background-color: #f44336; */
   color: #f44336;
   font-size: 1.5rem;
-  top: 20%;
+  top: 26%;
 }
 /*thiết lập style cho textarea khi được focus */
 .input-form textarea:focus {

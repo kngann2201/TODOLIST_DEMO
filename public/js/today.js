@@ -49,15 +49,16 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (task.completed === true) {
                     li.classList.add("completed"); 
                 }
-                // const selectElement = document.getElementById("myItem");
                 let classF = null;
+                li.classList.add(classF);
+                // const selectElement = document.getElementById("myItem");               
                 // for (let option of selectElement.options) {
                 //     if (option.value === task.filter) {
                 //         classF = option.id; 
                 //         break; 
                 //     }
                 // }
-              li.classList.add(classF);
+              
               todoList.appendChild(li);
               addCloseButton(li);
             }

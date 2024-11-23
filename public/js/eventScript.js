@@ -52,6 +52,7 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         renderCalendar(); // calling renderCalendar function
     });
 });
+///////////////////////TRANG BÊN DƯỚI
 document.addEventListener('DOMContentLoaded', function() {
     //Welcome
     const name = localStorage.getItem('name');
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
               const events = await response.json();
               // console.log(events)   // Kiểm tra
               const eventList = document.getElementById('myUL');
+              const today = new Date();
               eventList.innerHTML = ''; 
               events.forEach(task => { 
                 const dateType = new Date(task.createdAt);
