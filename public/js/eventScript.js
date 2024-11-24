@@ -204,16 +204,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const choice = selectElement.options[selectElement.selectedIndex].text;
       const choices = selectElement.options[selectElement.selectedIndex].id;
       console.log(choice);
-      //----------------------------------------------------//
       var x = document.createElement("SPAN");
       x.className = "filterToday";
       x.textContent = choice;
       li.appendChild(x);
-      // var y = document.createElement("SPAN");
-      // y.className = "dateToday";
-      // y.textContent = dateType.getDate() + '/' + dateType.getMonth() + 1;
-      // li.appendChild(y);
-      //----------------------------------------------------//
       li.classList.add(choices);
     // Gửi sự kiện mới lên server để lưu vào MongoDB
       fetch('http://localhost:5000/api/event/add', {
