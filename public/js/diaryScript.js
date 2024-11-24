@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         diaries.forEach(task => { 
           const dateType = new Date(task.createdAt);
           console.log(dateType.getDate());
-          if (dateType.getDate()===today.getDay())
+          if (dateType.getDate()===today.getDate())
           {         
             const li = document.createElement("li");
             var y = document.createElement("SPAN");
