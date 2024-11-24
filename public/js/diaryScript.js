@@ -3,9 +3,50 @@ document.addEventListener('DOMContentLoaded', function() {
   const name = localStorage.getItem('name');
   const userId = localStorage.getItem('userId');
   const taskId = localStorage.getItem('taskId');
-  // const contentId = localStorage.getItem('contentId');
-  console.log(name); //kiểm tra
   document.getElementById("name").innerHTML = `${name}`;
+
+  //Lấy danh sách sự kiện từ server để hiện thị ngay hôm nay khi tải trang
+  async function loadTasksDefault() {
+    if (!userId) {
+        alert('Vui lòng đăng nhập!');
+        window.location.href = 'login.html';
+        return;
+    } 
+    try {
+        const response = await fetch(`http://localhost:5000/api/diary/list/${userId}`);
+        if (!response.ok) {
+          throw new Error('Không thể tải sự kiện');
+        }
+        const diaries = await response.json();
+        const diaryList = document.getElementById('myUL');
+        const today = new Date();
+        console.log(today.getDate());
+        diaryList.innerHTML = ''; 
+        diaries.forEach(task => { 
+          const dateType = new Date(task.createdAt);
+          console.log(dateType.getDate());
+          if (dateType.getDate()===today.getDay())
+          {         
+            const li = document.createElement("li");
+            var y = document.createElement("SPAN");
+            y.className = "headlineDiary";
+            y.textContent = task.task;
+            li.appendChild(y);
+            var z = document.createElement("TEXTAREA");
+            z.value= task.content;
+            z.className = "contentDiary";
+            li.appendChild(z);
+            li.dataset.taskId = task._id;
+            diaryList.appendChild(li);
+            addCloseButton(li); 
+          }  
+        });
+    } catch (error) {
+        alert('Không có nhật ký nào được tìm thấy, hãy thử ngày khác nhé!');
+    }
+  }
+  loadTasksDefault();
+
   //Lấy ngày được click trên lịch
   const daysli = document.querySelectorAll(".days > li");
   daysli.forEach(day => {
@@ -60,45 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
       loadTasks();
     });
   });
-
-  // // Lấy danh sách sự kiện từ server
-  // async function loadTasks() {
-  //   if (!userId) {
-  //       alert('Vui lòng đăng nhập!');
-  //       window.location.href = 'login.html';
-  //       return;
-  //   }
-  //   // console.log('Đang gửi yêu cầu API để tải sự kiện...');  // Kiểm tra 
-  //   try {
-  //       const response = await fetch(`http://localhost:5000/api/diary/list/${userId}`);
-  //       if (!response.ok) {
-  //         throw new Error('Không thể tải sự kiện');
-  //       }
-  //       // console.log('API đã được gửi', response);  // Kiểm tra
-  //       const diarys = await response.json();
-  //       // console.log(diarys)   // Kiểm tra
-  //       const diaryList = document.getElementById('myUL');
-  //       diaryList.innerHTML = ''; 
-  //       diarys.forEach(task => {
-  //           const li = document.createElement("li");
-  //           var y = document.createElement("SPAN");
-  //           y.className = "headlineDiary";
-  //           y.textContent = task.task;
-  //           li.appendChild(y);
-  //           var z = document.createElement("TEXTAREA");
-  //           z.value= task.content;
-  //           z.className = "contentDiary";
-  //           li.appendChild(z);
-  //           li.dataset.taskId = task._id;
-  //           // li.dataset.contentId = content._id;
-  //           diaryList.appendChild(li);
-  //           addCloseButton(li);
-  //       });
-  //   } catch (error) {
-  //       alert('Lỗi khi tải sự kiện!');
-  //   }
-  // }
-  // loadTasks();
 
   //Tạo phần tử danh sách mới
   const input = document.getElementById('myInput');
@@ -158,16 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   // Xử lí "Add" 
   document.getElementById("addButton").addEventListener("click", newElement);
-  // Xử lí "Enter" từ bàn phím
-  // document.getElementById("myInput").addEventListener("keypress", function(event) {
-  //   if (event.key === "Enter") {
-  //       newElement();   
-  // }});
-  // document.getElementById("inputDiaryValue").addEventListener("keypress", function(event) {
-  //   if (event.key === "Enter") {
-  //       newElement();   
-  // }});
-
 
   //Hàm thêm nút đóng cho một mục danh sách
   function addCloseButton(li) {

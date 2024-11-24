@@ -61,9 +61,58 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(name); //kiểm tra
     document.getElementById("name").innerHTML = `${name}`;
 
+    //Lấy danh sách sự kiện từ server để hiện thị ngay hôm nay khi tải trang
+    async function loadTasksDefault() {
+      if (!userId) {
+          alert('Vui lòng đăng nhập!');
+          window.location.href = 'login.html';
+          return;
+      }
+      try {
+          const response = await fetch(`http://localhost:5000/api/event/list/${userId}`);
+          if (!response.ok) {
+            throw new Error('Không thể tải sự kiện');
+          }
+          const events = await response.json();
+          const eventList = document.getElementById('myUL');
+          const today = new Date();
+          eventList.innerHTML = ''; 
+          events.forEach(task => { 
+            const dateType = new Date(task.createdAt);
+            if (dateType.getDate()===today.getDate())
+            {
+              const li = document.createElement('li');
+              var y = document.createElement("SPAN");
+              y.className = "taskToday";
+              y.textContent = task.task;
+              li.appendChild(y);
+              var u = document.createElement("SPAN");
+              u.className = "filterToday";
+              u.textContent = task.filter;
+              li.appendChild(u);
+              li.dataset.taskId = task._id;
+              if (task.completed === true) {
+                li.classList.add("completed"); 
+              }
+              const selectElement = document.getElementById("myItem");
+              let classF = null;
+              for (let option of selectElement.options) {
+                if (option.value === task.filter) {
+                    classF = option.id; 
+                    break; 
+                }
+              }
+              li.classList.add(classF);
+              eventList.appendChild(li);
+              addCloseButton(li); 
+            } 
+          });
+      } catch (error) {
+          alert('Không có sự kiện nào được tìm thấy, hãy thử ngày khác nhé!');
+      }
+    }
+    loadTasksDefault();
     //Lấy ngày được click trên lịch
-    // const days = document.querySelector(".days");
-    // console.log(days);
     const daysli = document.querySelectorAll(".days > li");
     daysli.forEach(day => {
       day.addEventListener('click', function () {
@@ -79,15 +128,12 @@ document.addEventListener('DOMContentLoaded', function() {
               window.location.href = 'login.html';
               return;
           }
-          // console.log('Đang gửi yêu cầu API để tải sự kiện...');  // Kiểm tra 
           try {
               const response = await fetch(`http://localhost:5000/api/event/list/${userId}`);
               if (!response.ok) {
                 throw new Error('Không thể tải sự kiện');
               }
-              // console.log('API đã được gửi', response);  // Kiểm tra
               const events = await response.json();
-              // console.log(events)   // Kiểm tra
               const eventList = document.getElementById('myUL');
               const today = new Date();
               eventList.innerHTML = ''; 

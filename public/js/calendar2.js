@@ -6,7 +6,64 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log(name); //kiểm tra
   document.getElementById("name").innerHTML = `${name}`;
 
-  //Lấy ngày được click trên lịch
+  //Tách hàm tạo element theo điều kiện bọc ngoài
+  const makeElement = function(task, dateType, todoList) {
+    const li = document.createElement('li');
+    var y = document.createElement("SPAN");
+    y.className = "taskToday";
+    y.textContent = task.task;
+      li.appendChild(y);
+    var z = document.createElement("SPAN");
+    z.className = "dateToday";
+    z.textContent = dateType.getDate() + '/' + (dateType.getMonth() + 1);
+      li.appendChild(z);
+    var u = document.createElement("SPAN");
+    u.className = "filterToday";
+    u.textContent = task.filter;
+      li.appendChild(u);
+    li.dataset.taskId = task._id;
+    if (task.completed === true) {
+        li.classList.add("completed");
+    }
+    const selectElement = document.getElementById("myItem");
+    let classF = null;
+    for (let option of selectElement.options) {
+        if (option.value === task.filter) {
+            classF = option.id;
+            break;
+        }
+    }
+    li.classList.add(classF);
+    todoList.appendChild(li);
+    addCloseButton(li); 
+};
+  //Lấy danh sách nhiệm vụ từ server để hiện thị ngày hôm nay khi tải trang
+  async function loadTasksDefault() {
+    if (!userId) {
+      alert('Vui lòng đăng nhập!');
+      window.location.href = 'login.html';
+      return;
+    }
+    try {
+      const response = await fetch(`http://localhost:5000/api/todo/list/${userId}`);
+      if (!response.ok) {
+        throw new Error('Không thể tải nhiệm vụ');
+      }
+      const todos = await response.json();
+      const todoList = document.getElementById('myULTodo');
+      console.log(todoList);
+      todoList.innerHTML = '';
+      todos.forEach(task => {
+        const today = new Date();
+          makeElement(task, today, todoList); 
+      });
+    } catch (error) {
+      alert('Lỗi khi tải nhiệm vụ!!');
+    }
+  }
+  loadTasksDefault();
+
+  //Lấy ngày được click trên lịch 
   const daysli = document.querySelectorAll(".days > li");
   daysli.forEach(day => {
     day.addEventListener('click', function () {
@@ -15,12 +72,14 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(this);
       const d = this.innerText;
       console.log(d);
-      // Lấy danh sách nhiệm vụ từ server
+      const selectElement = document.getElementById("myItem");
+      const myOption = document.querySelectorAll('#myItem > option')
+      //Lấy danh sách nhiệm vụ từ server
       async function loadTasks() {
         if (!userId) {
           alert('Vui lòng đăng nhập!');
-            window.location.href = 'login.html';
-            return;
+          window.location.href = 'login.html';
+          return;
         }
         try {
           const response = await fetch(`http://localhost:5000/api/todo/list/${userId}`);
@@ -30,46 +89,13 @@ document.addEventListener('DOMContentLoaded', function () {
           const todos = await response.json();
           const todoList = document.getElementById('myULTodo');
           console.log(todoList);
-          todoList.innerHTML = ''; 
+          todoList.innerHTML = '';
           todos.forEach(task => {
             const dateType = new Date(task.createdAt);
             const today = new Date();
+            if (dateType.getDate() == d) {
 
-            if (dateType.getDate()==d)
-            { 
-              //Lấy option được click trong myItem
-              const selection = document.getElementById('myItem');
-              const myOption = document.querySelectorAll('#myItem>option');
-              console.log(myOption);
-              //Tạo element theo điều kiện bọc nó
-              const li = document.createElement('li');
-              var y = document.createElement("SPAN");
-              y.className = "taskToday";
-              y.textContent = task.task;
-                li.appendChild(y);
-              var z = document.createElement("SPAN");
-              z.className = "dateToday";
-              z.textContent = dateType.getDate() + '/' + (dateType.getMonth() +1);
-                li.appendChild(z);
-              var u = document.createElement("SPAN");
-              u.className = "filterToday";
-              u.textContent = task.filter;
-              li.appendChild(u);
-              li.dataset.taskId = task._id;
-              if (task.completed === true) {
-                li.classList.add("completed"); 
-              }
-              const selectElement = document.getElementById("myItem");
-              let classF = null;
-              for (let option of selectElement.options) {
-                if (option.value === task.filter) {
-                  classF = option.id; 
-                  break; 
-                }
-              }
-              li.classList.add(classF);
-              todoList.appendChild(li);
-              addCloseButton(li);
+              makeElement(task, dateType, todoList);
             }
           });
         } catch (error) {
