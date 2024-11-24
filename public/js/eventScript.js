@@ -97,13 +97,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 {            
                   const li = document.createElement('li');
                   var y = document.createElement("SPAN");
-                y.className = "taskToday";
-                y.textContent = task.task;
-                li.appendChild(y);
-                var u = document.createElement("SPAN");
-                u.className = "filterToday";
-                u.textContent = task.filter;
-                li.appendChild(u);
+                  y.className = "taskToday";
+                  y.textContent = task.task;
+                  li.appendChild(y);
+                  var u = document.createElement("SPAN");
+                  u.className = "filterToday";
+                  u.textContent = task.filter;
+                  li.appendChild(u);
                   li.dataset.taskId = task._id;
                   if (task.completed === true) {
                     li.classList.add("completed"); 
