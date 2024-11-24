@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }   
               });
           } catch (error) {
-              alert('Không có sự kiện nào được tìm thấy, hãy thử ngày khác nhé!');
+              alert('Không có sự kiện nào được tìm thấy!');
           }
         }
         loadTasks();
@@ -184,10 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const inputDateValue = inputDate.value;
       const dateType = new Date(inputDateValue);
       console.log(dateType);
-      // const getDate = dateType.getDate(); 
-      // const getMonth = dateType.getMonth() + 1;
-      // const getYear = dateType.getFullYear();
-      // console.log(`Date: ${getDate}, Month: ${getMonth}, Year: ${getYear}`);
       console.log('inputValue:', inputValue);
       if (!inputValue) {
         alert("Hãy viết nội dung trước khi thêm nhé!");
@@ -214,8 +210,6 @@ document.addEventListener('DOMContentLoaded', function() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ userId: userId, task: inputValue, completed: false, filter: choice, createdAt : dateType })
-        // body: JSON.stringify({ userId: userId, task: inputValue, completed: false, filter: choice }) 
-
       })
       .then(response => response.json())
       .then(data => {

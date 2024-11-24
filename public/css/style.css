@@ -1,3 +1,38 @@
+/* Change start */
+#myULTodo, #myUL, #myULEvent {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  width : 60%;
+  margin : 1rem auto;
+  z-index: 10;
+  font-size: 0.9rem;
+}
+#myULTodo li, #myUL li, #myULEvent li  {
+  position: relative;
+  padding: 10px;
+  background-color: white;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+  border : 1px solid gray;
+  color : black;
+  font-weight: 100;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#myULTodo li.completed, #myULTodo li.completed, #myULEvent li.completed {
+  text-decoration: line-through;
+  background-color: #e9ecef;
+  color: black;
+}
+/* Change end */
+
 /* Import Google font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 *{
@@ -36,33 +71,6 @@ select {
   box-sizing: border-box;
   border : 1px solid rgba(128, 128, 128, 0.685);
 }
-#myUL {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  width : 60%;
-  margin : 1rem auto;
-  z-index: 10;
-  font-size: 0.9rem;
-}
-#myUL li {
-  position: relative;
-  padding: 10px;
-  background-color: white;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.2s;
-  text-decoration: none;
-  border : 1px solid gray;
-  color : black;
-  font-weight: 100;
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 .close {
   position: absolute;
   right: 10px;
@@ -83,11 +91,6 @@ select {
   color: #f44336;
   font-size: 1.5rem;
   top: 20%;
-}
-#myUL li.completed {
-  text-decoration: line-through;
-  background-color: #e9ecef;
-  color: black;
 }
 select {
   margin-right: 1rem;
