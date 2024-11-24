@@ -70,10 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputDateValue = inputDate.value;
     const dateType = new Date(inputDateValue);
     console.log('inputValue:', inputValue);
-    const getDay = dateType.getDate(); 
-    const getMonth = dateType.getMonth() + 1;
-    const getYear = dateType.getFullYear();
-    console.log(`Date: ${getDay}, Month: ${getMonth}, Year: ${getYear}`)
     if (!inputValue) {
       alert("Hãy viết nội dung trước khi thêm nhé!");
       return;
@@ -83,14 +79,22 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     const li = document.createElement("li");
-    li.textContent = inputValue + ' ' + getDay + '/' + getMonth;
+    // li.textContent = inputValue + ' ' + getDay + '/' + getMonth;
+    li.textContent = inputValue;
     const list = document.getElementById("myUL");
     const selectElement = document.getElementById("myItem");
     const choice = selectElement.options[selectElement.selectedIndex].text;
     const choices = selectElement.options[selectElement.selectedIndex].id;
     console.log(choice);
+    var x = document.createElement("SPAN");
+      x.className = "dateToday";
+      x.textContent = dateType.getDate() + '/' + (dateType.getMonth() + 1);
+      li.appendChild(x);
+    var y = document.createElement("SPAN");
+      y.className = "filterToday";
+      y.textContent = choice;
+      li.appendChild(y);
     li.classList.add(choices);
-    // const selectedDate = document.getElementById('date').value;
   // Gửi nhiệm vụ mới lên server để lưu vào MongoDB
     fetch('http://localhost:5000/api/todo/add', {
       method: 'POST',

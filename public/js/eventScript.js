@@ -182,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function newElement() {
       const inputValue = input.value;
       const inputDateValue = inputDate.value;
-      // const dateType = new Date(inputDateValue).toISOString();
       const dateType = new Date(inputDateValue);
       console.log(dateType);
       // const getDate = dateType.getDate(); 
@@ -198,15 +197,23 @@ document.addEventListener('DOMContentLoaded', function() {
         alert("Chọn ngày đã nhé!");
         return;
       }
-      const li = document.createElement("li");
+      const li = document.createElement("li")            
       li.textContent = inputValue;
       const list = document.getElementById("myUL");
       const selectElement = document.getElementById("myItem");
       const choice = selectElement.options[selectElement.selectedIndex].text;
       const choices = selectElement.options[selectElement.selectedIndex].id;
       console.log(choice);
-      // const inputValuee = inputValue + ' ' + getDate + '/' + getMonth + '/' + getYear;
-      // li.textContent = inputValuee;
+      //----------------------------------------------------//
+      var x = document.createElement("SPAN");
+      x.className = "filterToday";
+      x.textContent = choice;
+      li.appendChild(x);
+      // var y = document.createElement("SPAN");
+      // y.className = "dateToday";
+      // y.textContent = dateType.getDate() + '/' + dateType.getMonth() + 1;
+      // li.appendChild(y);
+      //----------------------------------------------------//
       li.classList.add(choices);
     // Gửi sự kiện mới lên server để lưu vào MongoDB
       fetch('http://localhost:5000/api/event/add', {
