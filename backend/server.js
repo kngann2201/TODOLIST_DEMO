@@ -75,6 +75,11 @@ app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'start.html'));
 });
 
+// Route cho trang chart
+app.get('/chart.html', (req, res) => {
+   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'chart.html'));
+});
+
 //Kết nối auth.js với server.js để sử dụng các routes đăng kí và đăng nhập
 const authRoutes = require('./auth');
 app.use('/api/auth', authRoutes);
