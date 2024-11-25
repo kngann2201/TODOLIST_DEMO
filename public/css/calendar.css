@@ -26,10 +26,15 @@
   -ms-user-select: none;
   user-select: none;
 }
-#myULTodo li.completed, #myULTodo li.completed, #myULEvent li.completed {
+#myULTodo li.completed, #myUL li.completed, #myULEvent li.completed {
   text-decoration: line-through;
   background-color: #e9ecef;
   color: black;
+}
+#myULTodo, #myULEvent {
+  padding-top : 2rem;
+  width : 100%; 
+  margin : 3.2rem;
 }
 /* Change end */
 

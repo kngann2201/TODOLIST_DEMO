@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   }, false);
 
 //------------------EVENT---------------------------//
-    // Lấy danh sách nhiệm vụ từ server
+    // Lấy danh sách sự kiện từ server
     async function loadTasksEvent(selected = null) {
       if (!userId) {
           alert('Vui lòng đăng nhập!');
@@ -224,11 +224,19 @@ document.addEventListener('DOMContentLoaded', async function() {
   }, false);
 
   //Gắn sự kiện cho thẻ select
+  const selectElement = document.getElementById('myItem');
   selectElement.addEventListener('change', async function () {
     const selected = selectElement.value; 
     await loadTasksTodo(selected);
     await loadTasksEvent(selected); 
-});
+    if (selected === 'Tất cả')
+    {
+      await loadTasksTodo();
+      await loadTasksEvent(); 
+    }
+  });
+  
+  
 
   
 

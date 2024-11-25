@@ -65,6 +65,11 @@ app.get('/today.html', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'today.html'));
 });
 
+// Route cho trang lịch sử hoạt động
+app.get('/history.html', (req, res) => {
+   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'history.html'));
+});
+
 // Cấu hình route chính để hiển thị khi truy cập vào localhost:5000
 app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'start.html'));
@@ -85,6 +90,10 @@ app.use('/api/event', eventRoutes);
 //Kết nối diary.js với server.js để sử dụng các routes tương tác nhiệm vụ
 const diaryRoutes = require('./diary');
 app.use('/api/diary', diaryRoutes);
+
+//Kết nối history.js với server.js để sử dụng các routes tương tác nhiệm vụ
+const historyRoutes = require('./history');
+app.use('/api/history', historyRoutes);
 
 // Thiết lập server lắng nghe tại cổng 5000
 const PORT = 5000;

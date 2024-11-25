@@ -1,0 +1,24 @@
+h1 {
+    text-align: center;
+    color: #cd7c5d;
+    display: block;
+    font-size: 3rem;
+    margin : 3rem auto 1rem;
+    padding : 1rem;
+}
+#cache {
+    width : 80%;
+    margin : 1rem auto;
+}
+#cache > li {
+    list-style: none;
+    padding: 1rem;
+    margin-top: 20px;
+    width : 80%;
+    margin : 1rem auto;
+    z-index: 10;
+    font-size: 1rem;
+    background-color: #cd7d5d4d;
+    color : black;
+    border: 1px solid gray;
+}

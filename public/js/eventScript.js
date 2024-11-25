@@ -217,6 +217,27 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log(data);
           console.log('Thêm sự kiện thành công!');
           li.dataset.taskId = data.taskId;
+      // --------------------------------------------
+      const success = "Thêm sự kiện thành công!";
+      fetch('http://localhost:5000/api/history/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ userId: userId, content: success })
+      })
+      .then(response => response.json())
+      .then(
+          console.log('Thêm lịch sử thành công!'))
+      .catch(error => {
+          console.error('Lỗi khi thêm lịch sử:', error);
+          const fail = "Thêm nhật kí thất bại!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: fail })
+          })
+
+      });
+      // --------------------------------------------
 
       })
       .catch(error => {
@@ -257,8 +278,24 @@ document.addEventListener('DOMContentLoaded', function() {
               throw new Error('Xóa sự kiện thất bại.');
             }
             console.log('sự kiện đã được xóa thành công!'); //history
+            // --------------------------------------------
+            const success = "Xóa sự kiện thành công!";
+            fetch('http://localhost:5000/api/history/add', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json'},
+              body: JSON.stringify({ userId: userId, content: success })
+            })
           })
-          .catch(error => console.error('Có lỗi khi xóa sự kiện:', error));
+          .catch(error => 
+            {
+              console.error('Có lỗi khi xóa sự kiện:', error)
+              const fail = "Xóa sự kiện thất bại!";
+              fetch('http://localhost:5000/api/history/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify({ userId: userId, content: fail })
+              })  
+            });
       }
     }
     // Thêm nút xóa vào mỗi mục danh sách hiện có
@@ -275,9 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ev.target.classList.toggle('completed');
     }
     const taskId = ev.target.dataset.taskId;
-    // console.log(taskId);
     const status = ev.target.classList.contains('completed');
-    // console.log(status); //kiểm tra
     // Cập nhật lại status trên MongoDB
     if (!taskId)
       {
@@ -294,9 +329,22 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(data => {
           console.log(data.message); 
           console.log("Cập nhật trạng thái sự kiện thành công!");
+          // --------------------------------------------
+          const success = "Cập nhật sự kiện thành công!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: success })
+          })
       })
       .catch(error => {
         console.error('Lỗi khi cập nhật trạng thái sự kiện:', error);
+        const fail = "Cập nhật sự kiện thất bại!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: fail })
+          })
       });
     }
     }, false);

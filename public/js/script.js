@@ -107,9 +107,22 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(data);
         console.log('Thêm nhiệm vụ thành công!');
         li.dataset.taskId = data.taskId;
+        const success = "Thêm nhiệm vụ thành công!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: success })
+          })
+        
     })
     .catch(error => {
         console.error('Lỗi khi thêm nhiệm vụ:', error);
+        const fail = "Thêm nhiệm vụ thất bại!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: fail })
+          })
     });
     list.insertBefore(li, list.firstChild);
     addCloseButton(li);
@@ -146,8 +159,24 @@ document.addEventListener('DOMContentLoaded', function() {
             throw new Error('Xóa nhiệm vụ thất bại.');
           }
           console.log('Nhiệm vụ đã được xóa thành công!'); //history
+          // --------------------------------------------
+          const success = "Xóa nhiệm vụ thành công!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: success })
+          })
         })
-        .catch(error => console.error('Có lỗi khi xóa nhiệm vụ:', error));
+        .catch(error => 
+          {console.error('Có lỗi khi xóa nhiệm vụ:', error)
+            // --------------------------------------------
+          const fail = "Xóa nhiệm vụ thất bại!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: fail })
+          })
+    });
     }
   }
   // Thêm nút xóa vào mỗi mục danh sách hiện có
@@ -182,9 +211,23 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
         console.log(data.message); 
         console.log("Cập nhật trạng thái nhiệm vụ thành công!");
+        // --------------------------------------------
+        const success = "Cập nhật nhiệm vụ thành công!";
+        fetch('http://localhost:5000/api/history/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify({ userId: userId, content: success })
+        })
     })
     .catch(error => {
       console.error('Lỗi khi cập nhật trạng thái nhiệm vụ:', error);
+      // --------------------------------------------
+      const fail = "Cập nhật sự kiện thất bại!";
+      fetch('http://localhost:5000/api/history/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ userId: userId, content: fail })
+      })
     });
   }
   }, false);
