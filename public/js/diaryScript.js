@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputDiaryValue = inputDiary.value;
     const inputDateValue = inputDate.value;
     const dateType = new Date(inputDateValue);
+    const today = new Date();
     console.log('inputValue:', inputValue);
     console.log('inputDate:', inputDateValue);
     console.log('inputDateType:', dateType);
@@ -126,7 +127,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!inputDateValue) {
       alert("Chọn ngày đã nhé!");
       return;
-    }// 
+    } 
+    if (dateType.getDate() > today.getDate()) {
+      alert("Nhật ký là để ghi lại những câu chuyện thực tế, chứ không phải những giả định!");
+      return;
+    } 
     const li = document.createElement("li");
     var span = document.createElement("SPAN");
     span.className = "headlineDiary";

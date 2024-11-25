@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
             let dateType = new Date(task.createdAt);
             // console.log(task.userId);
             // console.log(task.content);
-            console.log(dateType);
+            // console.log(dateType);
                 const li = document.createElement('li');
                 li.textContent = task.content;
-                // li.textContent = task.content + " lúc " +  localNow.getHours() + ':' + localNow.getMinutes() + ':' + localNow.getSeconds();
+                li.textContent = task.content + " lúc " +  dateType.getHours() + ':' + dateType.getMinutes() + ':' + dateType.getSeconds();
                 historyList.appendChild(li);
             //   }   
             });
