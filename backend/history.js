@@ -33,14 +33,11 @@ router.post('/add', async (req, res) => {
       }
       const newHistory = new History({
          userId,
-         content,
-         createdAt
+         content
       });
       try {
          const savedHistory = await newHistory.save();  
-         res.status(201).json({ message: 'lưu id thành công!', createdAt: savedHistory.createdAt });
-         console.log(savedHistory.createdAt);
-         // console.log(savedEvent._id);
+         res.status(201).json({ message: 'lưu id thành công!' });
        } catch (error) {
          console.error('Lỗi khi lưu lịch sử!', error);
          res.status(500).json({ message: 'lưu id thất bại!' });

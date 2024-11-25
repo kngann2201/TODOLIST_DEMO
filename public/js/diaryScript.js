@@ -156,15 +156,22 @@ document.addEventListener('DOMContentLoaded', function() {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ userId: userId, content: success })
       })
+      .then(response => response.json())
+      .then(
+          console.log('Thêm lịch sử thành công!'))
+      .catch(error => {
+          console.error('Lỗi khi thêm lịch sử:', error);
+          const fail = "Thêm nhật kí thất bại!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: fail })
+          })
+      });
+      // --------------------------------------------
     })
     .catch(error => {
         console.error('Lỗi khi thêm sự kiện:', error);
-        const fail = "Thêm nhật kí thất bại!";
-        fetch('http://localhost:5000/api/history/add', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify({ userId: userId, content: fail })
-        })
     });
     list.insertBefore(li, list.firstChild);
     addCloseButton(li);
@@ -195,21 +202,29 @@ document.addEventListener('DOMContentLoaded', function() {
           if (!response.ok) {
             throw new Error('Xóa sự kiện thất bại.');
           }
-          const success = "Xóa nhật kí thành công!";
-            fetch('http://localhost:5000/api/history/add', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json'},
-              body: JSON.stringify({ userId: userId, content: success })
-            })
+          // --------------------------------------------
+      const success = "Xóa nhật kí thành công!";
+      fetch('http://localhost:5000/api/history/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ userId: userId, content: success })
+      })
+      .then(response => response.json())
+      .then(
+          console.log('Thêm lịch sử thành công!'))
+      .catch(error => {
+          console.error('Lỗi khi thêm lịch sử:', error);
+          const fail = "Xóa nhật kí thất bại!";
+          fetch('http://localhost:5000/api/history/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ userId: userId, content: fail })
+          })
+      });
+      // --------------------------------------------
         })
         .catch(error => {
           console.error('Có lỗi khi xóa sự kiện:', error)
-          const fail = "Xóa nhật kí thất bại!";
-            fetch('http://localhost:5000/api/history/add', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json'},
-              body: JSON.stringify({ userId: userId, content: fail })
-            })
     });
     }
   }

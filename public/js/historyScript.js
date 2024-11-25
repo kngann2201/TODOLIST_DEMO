@@ -22,14 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
             historyList.innerHTML = ''; 
             histories.forEach(task => { 
-            const dateType = new Date(task.createdAt);
-            console.log(task.content);
-            console.log(today);
-
-            // var localNow = new Date( task.createdAt.getTime() -  ( record.offset * 70000 ) );
-            // console.log(hours + ":" + minutes + ":" + seconds);
-            //   if (dateType.getDate()==today.getDate())
-            //   {            
+            let dateType = new Date(task.createdAt);
+            // console.log(task.userId);
+            // console.log(task.content);
+            console.log(dateType);
                 const li = document.createElement('li');
                 li.textContent = task.content;
                 // li.textContent = task.content + " lúc " +  localNow.getHours() + ':' + localNow.getMinutes() + ':' + localNow.getSeconds();
