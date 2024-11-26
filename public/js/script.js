@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputValue = input.value;
     const inputDateValue = inputDate.value;
     const dateType = new Date(inputDateValue);
+    const today = new Date();
     console.log('inputValue:', inputValue);
     if (!inputValue) {
       alert("Hãy viết nội dung trước khi thêm nhé!");
@@ -76,6 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (!inputDateValue) {
       alert("Chọn ngày đã nhé!");
+      return;
+    }
+    if (dateType < today) {
+      alert("Hãy để quá khứ đã qua trôi đi, làm gì nữa!!! Hyax chọn ngày khác nhé!");
       return;
     }
     const li = document.createElement("li");

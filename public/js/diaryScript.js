@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
       alert("Chọn ngày đã nhé!");
       return;
     } 
-    if (dateType.getDate() > today.getDate()) {
+    if (dateType > today) {
       alert("Nhật ký là để ghi lại những câu chuyện thực tế, chứ không phải những giả định!");
       return;
     } 

@@ -5,13 +5,12 @@
     <link rel="shortcut icon" href="../img/download__8_-removebg.png">
     <title>Mèo Meo List - Lịch</title>
     <link rel="stylesheet" href="../css/chart.css">
-    <link rel="stylesheet" href="../css/calendar.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/45371830ed.js" crossorigin="anonymous"></script>
     <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <script src="../js/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
    
   </head>
@@ -19,12 +18,19 @@
     <!-- Phần nội dung bên trái -->
     <section class="left">
         <div class="chart">
+            <div class="chart-title">Biểu đồ số lượng từng phân loại nhiệm vụ của bạn</div>
             <canvas id="todoChart"></canvas>
         </div>
-        <div class="filter">
+        <div class="progressText"></div>
+        <div class="progress">
+          <div class="progressBar" id="progressBar"></div> 
+      </div>
+        <!-- <div class="filter">
+            <div class="chart-title">Biểu đồ số lượng từng phân loại nhiệm vụ của bạn</div>
             <canvas id="todoFilter"></canvas>
+            <div class="chart-title">Biểu đồ số lượng từng phân loại nhiệm vụ của bạn</div>
             <canvas id="eventFilter"></canvas>
-        </div>
+        </div> -->
     </section>
     <!-- Phần menu bên phải -->
   <section class="right">
@@ -33,7 +39,7 @@
         <div>
           <img src="../img/download__1_-removebg-preview.png" alt="avarta">
           <span id="name"></span>
-          <a href="start.html" id = "logout">
+          <a href="start.html" id = "logout" class ="a">
             <i class="fa-solid fa-right-from-bracket"></i>
           </a>
         </div>
@@ -46,31 +52,31 @@
         <span class="menuBig">CÔNG VIỆC</span>
         <ul class="menuSmall">
           <li>
-            <a href="today.html" id ="today-todo">
+            <a href="today.html" id ="today-todo" class ="a">
               <i class="fa-solid fa-bars"></i>
               <span>Công việc hôm nay</span>
             </a>
           </li>
           <li>
-            <a href="calendar.html" id = "calendar">
+            <a href="calendar.html" id = "calendar" class ="a">
               <i class="fa-solid fa-calendar-days"></i>
               <span>Lịch</span>
             </a>
           </li>
           <li>
-            <a href="event.html" id = "event">
+            <a href="event.html" id = "event" class ="a">
               <i class="fa-solid fa-folder"></i>
               <span>Sự kiện</span>
             </a>
           </li>
           <li>
-            <a href="diary.html" id = "diary">
+            <a href="diary.html" id = "diary" class ="a">
               <i class="fa-solid fa-book"></i>
               <span>Nhật ký</span>
             </a>
           </li>
           <li>
-            <a href="chart.html" id = "count">
+            <a href="chart.html" id = "count" class ="a">
               <i class="fa-solid fa-chart-pie"></i>
               <span>Thống kê</span>
             </a>
@@ -81,19 +87,19 @@
         <span class="menuBig">KHÁC</span>
         <ul class="menuSmall">
           <li>
-            <a href="">
+            <a href="" class ="a">
               <i class="fa-solid fa-circle-info"></i>
               <span>Thông tin tài khoản</span>
             </a>
           </li>
           <li>
-            <a href="history.html" id = "history">
+            <a href="history.html" id = "history" class ="a">
               <i class="fa-solid fa-clock-rotate-left"></i>
               <span>Lịch sử hoạt động</span>
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="" class ="a">
               <i class="fa-solid fa-code-compare"></i>
               <span>Phiên bản : 24.23.02 </span>
             </a>
