@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const User = require('./models/User');
 const router = express.Router();
 
@@ -11,11 +12,13 @@ router.post('/register', async (req, res) => {
       if (existingUser) {
          return res.status(400).json({ message: 'Tên người dùng đã tồn tại!' });
       }
-      const newUser = new User({ username, password, name});
+       // Mã hóa mật khẩu
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({ username, password: hashedPassword, name});
       await newUser.save();
       res.status(201).json({ message: 'Đăng ký thành công!', name: newUser.name });
    } catch (error) {
-      resstatus(500).json({ message: 'Lỗi server!' });
+      res.status(500).json({ message: 'Lỗi server! Đăng kí không thành công!' });
    }
 });
 
@@ -29,12 +32,14 @@ router.post('/login', async (req, res) => {
       if (!user) {
          return res.status(400).json({ message: 'Không tồn tại người dùng này!' });
       }
-      if (password !== user.password) {
+      // Kiểm tra mật khẩu
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
          return res.status(400).json({ message: 'Sai mật khẩu!' });
       }
       res.status(200).json({ message: 'Đăng nhập thành công!', userId: user._id, name: user.name});
    } catch (error) {
-      res.status(500).json({ message: 'Lỗi server!' });
+      res.status(500).json({ message: 'Lỗi server! Ddăng nhập không thành công!' });
    }
 });
 module.exports = router;

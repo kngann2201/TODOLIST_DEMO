@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="../img/download__8_-removebg.png">
-    <title>Mèo Meo List - Lịch</title>
+    <title>Mèo Meo List - Công việc hôm nay</title>
     <!-- <link rel="stylesheet" href="../css/calendar.css"> -->
-    <link rel="stylesheet" href="../css/style.css">
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
     <link rel="stylesheet" href="../css/today.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/45371830ed.js" crossorigin="anonymous"></script>
@@ -17,29 +17,65 @@
   <body>
     <!-- Phần nội dung bên trái -->
     <section class="left">
+      <h1>CÔNG VIỆC HÔM NAY</h1>
+      <select id="myItem">
+        <option>Tất cả</option>
+        <optgroup label="Danh sách công việc" id="meomeo">
+          <!-- <option id = 'study'>Học tập</option>
+          <option id = 'goout'>Đi chơi</option>
+          <option id = 'hasTodo'>Việc cần làm</option> -->
+        </optgroup>
+        <optgroup label="Danh sách sự kiện">
+          <option id = 'birthday'>Sinh nhật</option>
+          <option id = 'schedule'>Lịch trình</option>
+          <option id = 'holiday'>Lễ</option>
+        </optgroup>
+      </select>
       <!-- Phần hiện nội dung bên dưới -->
-      <div class="wrapper">
         <div class="under">
-          <h1>CÔNG VIỆC HÔM NAY</h1>
-          <select id="myItem">
-            <option>Tất cả</option>
-            <optgroup label="Danh sách công việc">
-              <option id = 'study'>Học tập</option>
-              <option id = 'goout'>Đi chơi</option>
-              <option id = 'hasTodo'>Việc cần làm</option>
-            </optgroup>
-            <optgroup label="Danh sách sự kiện">
-              <option id = 'birthday'>Sinh nhật</option>
-              <option id = 'schedule'>Lịch trình</option>
-              <option id = 'holiday'>Lễ</option>
-            </optgroup>
-          </select>
-          <ul id="myULTodo">
-          </ul>
-          <ul id="myULEvent" style = "margin-top: 2rem;">
-          </ul>
+          <div class="wrapper">
+            <!-- <div class="clock">
+              <div class="hourHand"></div>
+              <div class="minuteHand"></div>
+              <div class="sec"><div class="secondHand"></div></div>
+              <div class="center"></div>
+              <div class="red-center center"></div>
+              <ul>
+                  <li><span>1</span></li>
+                  <li><span>2</span></li>
+                  <li><span>3</span></li>
+                  <li><span>4</span></li>
+                  <li><span>5</span></li>
+                  <li><span>6</span></li>
+                  <li><span>7</span></li>
+                  <li><span>8</span></li>
+                  <li><span>9</span></li>
+                  <li><span>10</span></li>
+                  <li><span>11</span></li>
+                  <li><span>12</span></li>
+              </ul>
+              <script src="../js/clock.js"></script>
+            </div> -->
+            <div class="wrappermini">
+              <div class="datetime-display">
+                <span id="time"></span>
+                <span id="day-and-date"></span>
+              </div>
+            </div>
+            <div class="wrappermini"><img src="../img/71459c5d2e4f94744409b8c84de8c7e1-removebg-preview.png" alt=""></div>
+            <div class="wrappermini">Hành động hôm nay, thành quả mai sau</div>
+          </div>
+          <div class="wrapper">
+            <h2>Việc cần làm</h2>
+            <ul id="myULTodo">
+            </ul>
+          </div>
+          <div class="wrapper">
+            <h2>Sự kiện</h2>
+            <ul id="myULEvent">
+            </ul>
+          </div>
         </div>
-      </div>
     </section>
     <!-- Phần menu bên phải -->
   <section class="right">

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+const bcrypt = require('bcryptjs');
 // const cors = require('cors');
 const app = express();
 
@@ -10,12 +11,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Kết nối MongoDB
-mongoose.connect('mongodb://localhost:27017/demo', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/todolist')
    .then(() => console.log("Kết nối MongoDB thành công!"))
    .catch(err => console.error("Không thể kết nối MongoDB:", err));
-   
-// // Sử dụng CORS (Cross-Origin Resource Sharing)
-// app.use(cors())
 
 // Cấu hình Express để phục vụ các file tĩnh (html,css,js)
 app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -70,14 +68,14 @@ app.get('/history.html', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'history.html'));
 });
 
-// Cấu hình route chính để hiển thị khi truy cập vào localhost:5000
-app.get('/', (req, res) => {
-   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'start.html'));
-});
-
 // Route cho trang chart
 app.get('/chart.html', (req, res) => {
    res.sendFile(path.join(__dirname, '..', 'public', 'html', 'chart.html'));
+});
+
+// Cấu hình route chính để hiển thị khi truy cập vào localhost:5000
+app.get('/', (req, res) => {
+   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'start.html'));
 });
 
 //Kết nối auth.js với server.js để sử dụng các routes đăng kí và đăng nhập
@@ -99,6 +97,10 @@ app.use('/api/diary', diaryRoutes);
 //Kết nối history.js với server.js để sử dụng các routes tương tác nhiệm vụ
 const historyRoutes = require('./history');
 app.use('/api/history', historyRoutes);
+
+//Kết nối label.js với server.js để sử dụng các routes tương tác nhiệm vụ
+const labelRoutes = require('./label');
+app.use('/api/label', labelRoutes);
 
 // Thiết lập server lắng nghe tại cổng 5000
 const PORT = 5000;

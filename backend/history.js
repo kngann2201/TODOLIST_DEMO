@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/list/:userId', async (req, res) => {
     try {
        const { userId } = req.params;
-       const tasks = await History.find({ userId }).select('content createdAt').sort({ createdAt: 1 });
+       const tasks = await History.find({ userId }).select('content createdAt').sort({ createdAt: -1 });
        // Kiểm tra nếu không có lịch sử
        if (tasks.length === 0) {
           console.log('Không có lịch sử nào được tìm thấy cho userId:', userId);

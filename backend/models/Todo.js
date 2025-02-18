@@ -6,7 +6,7 @@ const todoSchema = new mongoose.Schema({
    task: { type: String, required: true },
    completed: { type: Boolean},
    createdAt: { type: Date, default: Date.now },
-   filter: { type: String, default: "Tất cả"}
+   filter: { type: String, required: true}
 });
 
 module.exports = mongoose.model('Todo', todoSchema, 'todos');

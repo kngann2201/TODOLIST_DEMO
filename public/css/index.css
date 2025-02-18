@@ -4,6 +4,7 @@ body {
     padding: 0;
     z-index: -1;
     display: flex;
+    background-color:  #f89d73;
 }
 html, body {
     width: 100%;
@@ -13,22 +14,44 @@ a{
     text-decoration: none;
     color: #fffbfa
 }
+.taskToday{
+    width: 30%;
+    padding: 3px;
+  }
+.dateToday{
+      padding: 3px;
+      background-color: #ff8488a8;
+      border-radius: 5px;
+      width: 3rem;
+      text-align: center;
+  }
+.filterToday{
+      padding: 3px;
+      background-color: #ffa07a86;
+      border-radius: 5px;
+      width: 7rem;
+      margin-left: 8rem;
+      text-align: center;
+  }
 /* Phần bên trái*/
 section.left{
     margin-left: 0;
     margin-right: auto;
     width: 80%;
-    height: 100%;
+    height: min-content;
     /* background-color:  #fdfbf7; */
     color:  #cd7c5d;
     font-size: 60px;
     font-weight: bold;
     background-image: url(../img/Download\ premium\ psd\ _\ image\ of\ Artsy\ psd\ shimmering\ golden\ stars\ pattern\ banner\ by\ Aum\ about\ backgrounds\,\ stars\,\ design\ background\,\ pattern\,\ and\ glitter\ 2681052\(1\).jpeg);
     background-size: cover;
+    height : 100%;
 }
 h1 {
     text-align: center;
     color: #cd7c5d;
+    font-size: 60px;
+    margin: 30px;
 }
 .input-form {
     display : flex;
@@ -42,8 +65,9 @@ input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-select {
+select, #myItem {
     margin-right: 1rem;
+    width : 25%;
 }
 button#addButton {
     padding: 10px;
@@ -67,7 +91,15 @@ button#addButton {
     margin : 1rem auto;
     z-index: 10;
     font-size: 0.9rem;
+    height: 430px;
+    overflow: auto;
+    scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+#myUL::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+  }
 #myUL li {
     position: relative;
     padding: 10px;
@@ -80,6 +112,7 @@ button#addButton {
     border : 1px solid gray;
     color : black;
     font-weight: 100;
+    display: flex;
 
     -webkit-user-select: none;
     -moz-user-select: none;

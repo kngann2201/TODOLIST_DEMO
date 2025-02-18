@@ -27,8 +27,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // console.log(task.content);
             // console.log(dateType);
                 const li = document.createElement('li');
-                li.textContent = task.content;
-                li.textContent = task.content + " lúc " +  dateType.getHours() + ':' + dateType.getMinutes() + ':' + dateType.getSeconds();
+                var y = document.createElement("SPAN");
+                y.className = "contentHistory";
+                y.textContent =  task.content;
+                li.appendChild(y);
+                var z = document.createElement("SPAN");
+                z.className = "timeHistory";
+                z.textContent = " lúc " +  dateType.getHours() + ':' + dateType.getMinutes() + ':' + dateType.getSeconds();
+                li.appendChild(z);
+                var u = document.createElement("SPAN");
+                u.className = "dateHistory";
+                u.textContent = dateType.getDate() + '/' + (dateType.getMonth() +1)+ '/'+dateType.getFullYear();
+                li.appendChild(u);
                 historyList.appendChild(li);
             //   }   
             });

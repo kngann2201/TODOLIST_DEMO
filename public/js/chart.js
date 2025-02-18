@@ -12,23 +12,31 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!response.ok) {
               throw new Error('Không thể tải nhiệm vụ');
             }
-            // console.log('API đã được gửi', response);  // Kiểm tra
             const todos = await response.json();
-            // const list = document.querySelectorAll('#myItem option');
-            const xValues = ['Học tập', 'Đi chơi', 'Việc cần làm'];
-            // console.log(list);
-            var ht = 0, dc = 0, td = 0;
+            //Sử dụng Map cho hai mảng xValues và yValues
+            const filterCounts = new Map();
             todos.forEach(task => {
-                if (task.filter === "Học tập") ht++;
-                else if (task.filter === "Đi chơi") dc++;
-                else td++;  
-            }); 
-            const yValues = [ht, dc, td];
+                const filter = task.filter;
+                filterCounts.set(filter, (filterCounts.get(filter) || 0) + 1);
+            });
+            const xValues = [];
+            const yValues = [];
+            filterCounts.forEach((count, filter) => {
+                xValues.push(filter);
+                yValues.push(count);
+            });
             const barColors = [
+            "#F2D5DA",
+            "#BFBFE3", 
+            "#C4E2E4", 
+            "#F3D2C9", 
             "#F8DAE9",
             "#B9D6F3",
-            "#F1E8D9"
+            "#F1E8D9",
+            "#B5EAD7",
+            "#F8E3D0"     
             ];
+            Chart.defaults.font.size = 14;
             new Chart("todoChart", {
             type: "pie",
             data: {
@@ -40,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             options: {
                 responsive: true,
-                hoverOffset: 20
+                hoverOffset: 15
             }
     })
         } catch (error) {
@@ -62,24 +70,48 @@ document.addEventListener('DOMContentLoaded', function () {
             const xValues = ['Học tập', 'Đi chơi', 'Việc cần làm'];
             // console.log(list);
             var ht = 0, t = 0;
+            var comp = 0, total = 0;
+            const today = new Date();
             todos.forEach(task => {
                 // Tính toán phần trăm hoàn thành
                 if (task.completed === true) ht++;
                 t++;  
-            })
+                const dateType = new Date(task.createdAt);
+                if (dateType.getDate() === today.getDate() && dateType.getMonth() === today.getMonth() && dateType.getFullYear() === today.getFullYear()) {
+                    if (task.completed === true) comp++;
+                    total++;
+                }
+            });
             const totalTasks = t;
             const completedCount = ht;
-            console.log(t);
-            console.log(ht)
             const progressPercentage = (completedCount / totalTasks) * 100;
-            const progressBar = document.querySelector('.progressBar');
+            const progressBar = document.getElementById('progressBar');
             progressBar.style.width = progressPercentage + '%';
-            const progressText = document.querySelector('.progressText');
-            progressText.innerHTML = `Tiến độ hoàn thành các nhiệm vụ: ${progressPercentage}%`;
+            const progressText = document.getElementById('progressText');
+            if (!progressPercentage || progressPercentage === 0)
+            {
+                progressText.innerHTML = `Tiến độ hoàn thành các nhiệm vụ: 0% (${completedCount}/${totalTasks})`;
+            }
+            else {
+                progressText.innerHTML = `Tiến độ hoàn thành các nhiệm vụ: ${progressPercentage}% (${completedCount}/${totalTasks})`;
+            }
+            const totalTasksToday = total;
+            const completedCountToday = comp;
+            const progressPercentageToday = (completedCountToday/ totalTasksToday) * 100;
+            const progressBarToday = document.getElementById('progressBarToday');
+            progressBarToday.style.width = progressPercentageToday + '%';
+            const progressTextToday = document.getElementById('progressTextToday');
+            if (!progressPercentageToday || progressPercentageToday === 0)
+            {
+                progressTextToday.innerHTML = `Tiến độ hoàn thành các nhiệm vụ hôm nay: 0% (${completedCountToday}/${totalTasksToday})`;
+            }
+            else
+            {
+                progressTextToday.innerHTML = `Tiến độ hoàn thành các nhiệm vụ: ${progressPercentageToday}% (${completedCountToday}/${totalTasksToday})`;
+            }
         } catch (error) {
             alert('Lỗi khi tải nhiệm vụ!!');
         }       
     }
-    updateProgress();
-    
+    updateProgress();   
 });

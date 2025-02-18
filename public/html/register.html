@@ -4,18 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styleform.css">
+    <link rel="stylesheet" href="../css/start.css">
     <script src="../js/scriptform.js"></script>
+    <script src="../js/start.js"></script>
     <title>Đăng ký To-Do List</title>
-    <link rel="shortcut icon" href="https://cdn-icons-png.freepik.com/256/8476/8476676.png?semt=ais_hybrid">
+    <link rel="shortcut icon" href="../img/download__8_-removebg.png">
 </head>
 <body>
-    <h1>Đăng ký</h1>
-    <form id="registerForm">
+    <section class="backGround">
+        <div class="star">
+            <img src="../img/Feeling Lazy.gif" alt="">
+            <canvas></canvas>
+            <script src="../js/star.js"></script>
+        </div>
+        <div class="headline">
+          <div class="information">
+            <h1>Đăng ký</h1>
+            <!-- <div id="slogan"><img src="../img/Yellow_and_Brown_Cute_Cat_Abstract_Shapes_Daily_Agenda_Presentation-removebg-preview.png" alt=""></div> -->
+            <form id="registerForm">
+                <input type="text" id="register-username" placeholder="Tên đăng nhập" required>
+                <input type="password" id="register-password" placeholder="Mật khẩu" required>
+                <input type="text" id="register-name" placeholder="Tên của bạn" required maxlength="11">
+                <button type="submit">Đăng ký</button>
+            </form>
+            <p id="meow">Đã có tài khoản? <a id="meow" href="./login.html">Đăng nhập tại đây.</a></p>
+            <div class="copyright">
+                <div>Demo_CNMNM_OU_DHIT2302</div>
+                <div>Kim Ngân - Hương Thảo</div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="backGroundMeo">
+        </div> -->
+      </section>
+    <!-- <h1>Đăng ký</h1> -->
+    <!-- <form id="registerForm">
         <input type="text" id="register-username" placeholder="Tên đăng nhập" required>
         <input type="password" id="register-password" placeholder="Mật khẩu" required>
-        <input type="text" id="register-name" placeholder="Tên của bạn" required>
+        <input type="text" id="register-name" placeholder="Tên của bạn" required maxlength="11">
         <button type="submit">Đăng ký</button>
     </form>
-    <p>Đã có tài khoản? <a href="./login.html">Đăng nhập tại đây.</a></p>
+    <p>Đã có tài khoản? <a href="./login.html">Đăng nhập tại đây.</a></p> -->
 </body>
 </html>

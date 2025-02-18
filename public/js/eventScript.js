@@ -8,8 +8,8 @@ currYear = date.getFullYear(),
 currMonth = date.getMonth();
 
 // storing full name of all months in array
-const months = ["January", "February", "March", "April", "May", "June", "July",
-              "August", "September", "October", "November", "December"];
+const months = ["Tháng 1 /", "Tháng 2 /", "Tháng 3 /", "Tháng 4 /", "Tháng 5 /", "Tháng 6 /", "Tháng 7 /",
+  "Tháng 8 /", "Tháng 9 /", "Tháng 10 /", "Tháng 11 /", "Tháng 12 /"];
 
 const renderCalendar = () => {
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
@@ -194,12 +194,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       const li = document.createElement("li")            
-      li.textContent = inputValue;
+      // li.textContent = inputValue;
       const list = document.getElementById("myUL");
       const selectElement = document.getElementById("myItem");
       const choice = selectElement.options[selectElement.selectedIndex].text;
       const choices = selectElement.options[selectElement.selectedIndex].id;
       console.log(choice);
+      var y = document.createElement("SPAN");
+      y.className = "taskToday";
+      y.textContent = inputValue;
+      li.appendChild(y);
       var x = document.createElement("SPAN");
       x.className = "filterToday";
       x.textContent = choice;

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="../img/download__8_-removebg.png">
-    <title>Mèo Meo List - Lịch</title>
+    <title>Mèo Meo List - Thống kê</title>
     <link rel="stylesheet" href="../css/chart.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/45371830ed.js" crossorigin="anonymous"></script>
@@ -17,23 +17,30 @@
   <body>
     <!-- Phần nội dung bên trái -->
     <section class="left">
+      <div class="chartBack">
+        <div class="chart-title">Biểu đồ số lượng từng phân loại nhiệm vụ của bạn</div>
         <div class="chart">
-            <div class="chart-title">Biểu đồ số lượng từng phân loại nhiệm vụ của bạn</div>
-            <canvas id="todoChart"></canvas>
+          <canvas id="todoChart"></canvas>
         </div>
-        <div class="progressText"></div>
+        <div class="progressText" id = "progressText"></div>
         <div class="progress">
           <div class="progressBar" id="progressBar"></div> 
+        </div>
+        <div class="progressText" id = "progressTextToday"></div>
+        <div class="progress">
+          <div class="progressBar" id="progressBarToday"></div> 
+        </div>
       </div>
     </section>
     <!-- Phần menu bên phải -->
-  <section class="right">
+  <!-- Phần menu bên phải -->
+    <section class="right">
     <section id = "welcome">
       <div class="avatarName">
         <div>
           <img src="../img/download__1_-removebg-preview.png" alt="avarta">
           <span id="name"></span>
-          <a href="start.html" id = "logout" class ="a">
+          <a href="start.html" id = "logout">
             <i class="fa-solid fa-right-from-bracket"></i>
           </a>
         </div>
@@ -46,31 +53,31 @@
         <span class="menuBig">CÔNG VIỆC</span>
         <ul class="menuSmall">
           <li>
-            <a href="today.html" id ="today-todo" class ="a">
+            <a href="today.html" id ="today-todo">
               <i class="fa-solid fa-bars"></i>
               <span>Công việc hôm nay</span>
             </a>
           </li>
           <li>
-            <a href="calendar.html" id = "calendar" class ="a">
+            <a href="calendar.html" id = "calendar">
               <i class="fa-solid fa-calendar-days"></i>
               <span>Lịch</span>
             </a>
           </li>
           <li>
-            <a href="event.html" id = "event" class ="a">
+            <a href="event.html" id = "event">
               <i class="fa-solid fa-folder"></i>
               <span>Sự kiện</span>
             </a>
           </li>
           <li>
-            <a href="diary.html" id = "diary" class ="a">
+            <a href="diary.html" id = "diary">
               <i class="fa-solid fa-book"></i>
               <span>Nhật ký</span>
             </a>
           </li>
           <li>
-            <a href="chart.html" id = "count" class ="a">
+            <a href="chart.html" id = "count">
               <i class="fa-solid fa-chart-pie"></i>
               <span>Thống kê</span>
             </a>
@@ -81,19 +88,19 @@
         <span class="menuBig">KHÁC</span>
         <ul class="menuSmall">
           <li>
-            <a href="" class ="a">
+            <a href="">
               <i class="fa-solid fa-circle-info"></i>
               <span>Thông tin tài khoản</span>
             </a>
           </li>
           <li>
-            <a href="history.html" id = "history" class ="a">
+            <a href="history.html" id = "history">
               <i class="fa-solid fa-clock-rotate-left"></i>
               <span>Lịch sử hoạt động</span>
             </a>
           </li>
           <li>
-            <a href="" class ="a">
+            <a href="">
               <i class="fa-solid fa-code-compare"></i>
               <span>Phiên bản : 24.23.02 </span>
             </a>
@@ -105,6 +112,6 @@
         <div>Kim Ngân - Hương Thảo</div>
       </div>
     </section>
-  </section>
+    </section>
   </body>
 </html>

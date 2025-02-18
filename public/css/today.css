@@ -1,12 +1,515 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: auto;
+    padding: 0;
+    z-index: -1;
+    display: flex;
+    overflow: hidden;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+  a{
+    text-decoration: none;
+    color: #fffbfa
+  }
+  /* clock
+  .clock {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: whitesmoke;
+    margin: 100px auto 0px auto;
+    position: relative;
+    border: 5px solid #1a0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+   
+  .center{
+    background-color: #000;
+    position: absolute;
+    left: calc(50% - 10px);
+    top:  calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 20;
+  }
+   
+  .red-center {
+    width: 8px;
+    height: 8px;
+    z-index: 30;
+    background-color: red;
+    left: calc(50% - 4px);
+    top: calc(50% - 4px);
+  }
+   
+  .hourHand{
+    width: 10px;
+    height: 75px;
+    background-color: #000;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: 75px;
+    left: 145px;
+    z-index: 10;
+    transform: rotate(150deg);
+    animation: hourMove 43200s linear infinite;
+    outline: 100px solid transparent;
+  }
+   
+  @keyframes hourMove {
+    0% {
+      transform: rotate(150deg);
+    }
+    100% {
+      transform: rotate(510deg);
+    }
+  }
+   
+  .minuteHand{
+    width: 5px;
+    height: 120px;
+    background-color: #000;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    left: 147px;
+    z-index: 9;
+    transform: rotate(0);
+    animation: minMove 3600s linear infinite;
+    outline: 100px solid transparent;
+  }
+   
+  @keyframes minMove {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+   
+  .secondHand{
+    width: 2px;
+    height: 150px;
+    background-color:red;
+    transform-origin: bottom center;
+    border-radius: 4px;
+    position: absolute;
+    top: -120px;
+    left: -1px;
+    transition: all 0.06s;
+    z-index: 8;  
+    transform: rotate(0);
+    outline: 100px solid transparent;
+  }
+   
+  .sec {
+    position: relative;
+    z-index: 30;
+    animation: secMove 60s normal infinite steps(60,end);
+  }
+   
+  @keyframes secMove {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+   
+  .clock ul{
+    list-style: none;
+    padding: 0;
+   
+  }
+  .clock ul li{
+    position: absolute;
+    width:20px;
+    height:20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 20px;
+    columns: #000;
+    font-family: "Droid Serif", serif;
+  }
+   
+  .clock ul li:nth-child(1){
+    right: 22%;
+    top: 6.5%;
+  }
+   
+  .clock ul li:nth-child(2){
+    right: 6%;
+    top: 25%;
+  }
+   
+  .clock ul li:nth-child(3){
+    right: 1%;
+    top: calc(50% - 10px);
+  }
+   
+  .clock ul li:nth-child(4){
+    right: 6%;
+    top: 69%;
+  }
+   
+  .clock ul li:nth-child(5){
+    right: 22%;
+    top: 84%;
+  }
+   
+  .clock ul li:nth-child(6){
+    right: calc(50% - 10px);
+    top: calc(99% - 20px);
+  }
+   
+  .clock ul li:nth-child(7){
+    left: 22%;
+    top: 84%;
+  }
+   
+  .clock ul li:nth-child(8){
+    left: 6%;
+    top: 69%;
+  }
+   
+  .clock ul li:nth-child(9){
+    left: 1%;
+    top: calc(50% - 10px);
+  }
+   
+  .clock ul li:nth-child(10){
+    left: 6%;
+    top: 25%;
+  }
+   
+  .clock ul li:nth-child(11){
+    left: 22%;
+    top: 6.5%;
+  }
+   
+  .clock ul li:nth-child(12){
+    right: calc(50% - 10px);
+    top: 1%;
+  } */
+/* time */
+.datetime-display {
+    text-align: center;
+    margin:1rem 1rem ;
+    border: solid #f89d73 5px;
+    border-radius: 5px;
+}
+
+#time {
+    font-weight: 400;
+    display: block;
+    font-size: 24px;
+    /* margin: 0 0 5px; */
+    /* letter-spacing: 5px; */
+    margin-top: 1rem;
+    margin-bottom: -1rem;
+}
+#day-and-date{
+    font-size: 24px;
+}
+/*  */
+.taskToday{
+  width: 40%;
+  padding: 3px;
+}
 .dateToday{
-    margin-left: 50px;
     padding: 3px;
     background-color: #ff8488a8;
     border-radius: 5px;
+    display: none;
 }
 .filterToday{
-    margin-left: 50px;
     padding: 3px;
     background-color: #ffa07a86;
     border-radius: 5px;
+    width: 30%;
+  text-align: center;
 }
+
+/* Change start */
+h2{
+    font-size: 24px;
+    width : 90%;
+    margin-left: 1rem;
+    text-align: left;
+    font-weight: bold;
+}
+#myULTodo, #myUL, #myULEvent {
+    list-style: none;
+    padding: 0;
+    margin-top: 0rem;
+    width : 90%;
+    margin : 0 auto;
+    z-index: 10;
+    font-size: 0.9rem;
+  }
+  #myULTodo li, #myUL li, #myULEvent li  {
+    position: relative;
+    padding: 10px;
+    background-color: white;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+    text-decoration: none;
+    border : 1px solid gray;
+    color : black;
+    font-weight: 100;
+    display: flex;
+    font-weight: 220;
+  
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  #myULTodo li.completed, #myULTodo li.completed, #myULEvent li.completed {
+    text-decoration: line-through;
+    background-color: #f89d73;
+    color: black;
+  }
+  /* Change end */
+  /* Phần hiện nhiệm vụ phía dưới */
+  .under{
+    padding: 10px;
+    display: flex;
+  }
+  h1 {
+    text-align: center;
+    color: #ad3e13;
+    display: block;
+    font-size: 1em;
+    margin : 2rem auto 0rem;
+  }
+  select {
+    padding : 1rem;
+    width : 50%;
+    margin : 0 25%;
+    box-sizing: border-box;
+    border : 1px solid rgba(128, 128, 128, 0.685);
+  }
+  .close {
+    position: absolute;
+    right: 10px;
+    top: 45%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+    padding : 5px;
+    height : 50%;
+    width : 5%;
+    margin : auto;
+    text-align: center;
+    transition : 0.1s;
+  } 
+  .close:hover {
+    /* background-color: #f44336; */
+    color: #f44336;
+    font-size: 1.5rem;
+    top: 20%;
+    transform: translateY(-30%);
+  }
+  select {
+    margin-right: 1rem;
+  }
+
+/* Phần xử lý copy từ home */
+  /* Phần bên trái*/
+  section.left{
+    margin-left: 0;
+    margin-right: auto;
+    width: 80%;
+    height: 100%;
+    /* background-color:  #fdfbf7; */
+    color:  #cd7c5d;
+    font-size: 60px;
+    font-weight: bold;
+    background-image: url(..//img/Sleepy\ cat\ animation\,\ Ngan\ Pham.gif);
+    background-size: cover;
+    opacity: 0.7;  
+    /* background-repeat: repeat-y; */
+  }
+  .wrapper{
+    background-color: white;
+    opacity: 0.95;  
+    margin: 10px;
+    border-radius: 5px;
+    height: 400px;
+    overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  }
+  .box ul::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+  }
+  .wrapper:first-child{
+    width: 30%;
+    background: none !important;
+    display: block;
+    overflow: hidden;
+  }
+  .wrappermini{
+    width: 95%;
+    background-color: white; 
+    margin: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .wrappermini:first-child{
+    height: 140px;
+    margin-top: 1.5rem;
+  }
+  .wrappermini:nth-child(2)>img{
+    width: 100%;
+    margin: auto;
+  }
+  .wrappermini:nth-child(2){
+    height: 100px;
+  }
+  .wrappermini:last-child{
+    height: 75px;
+    font-size: 24px;
+    text-align: center;
+    padding-top: 1rem;
+  }
+  .wrapper:nth-child(2){
+    width: 35%;
+  }
+  .wrapper:last-child{
+    width: 35%;
+  }
+  /* Phần menu bên phải */
+  #welcome{
+    background-color:  #f89d73;
+    height: 100%;
+  }
+  section.right{
+    background-color:  #f89d73;
+    margin-left: auto;
+    margin-right: 0;
+    width: 20%;
+    color: #fffbfa;
+    font-size: 16px;
+    z-index: 1000;
+  }
+  section.right>section{
+    position: fixed;
+  }
+  .avatarName{
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+  }
+  .avatarName>div{
+    display: flex;
+    align-items:center;
+    margin: 0 10px;
+  }
+  .avatarName>div>img{
+    width: 30%;
+  }
+  .avatarName>div>span{
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 5px;
+    text-align: left;
+  }
+  .avatarName>div>a{
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  /* Thêm công việc */
+  .addbusiness{
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+  .circle {
+    background: #fffbfa;
+    clip-path: circle(50%);
+    height: 2.4rem;
+    width: 2.4rem;
+  }
+  .circle{
+    font-size: 2.05rem;
+    font-weight: 500;
+    color:  #f89d73;
+  }
+  .addbusiness>span{
+    padding-left: 10px;
+    font-size: 16px;
+  }
+  .circle:hover{
+    animation: pulse 1.5s;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(.85);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 50px rgba(#5a99d4, 0);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(#5a99d4, 0);
+    }
+  }
+  /* menu */
+  .manage{
+    display: flex;
+  }
+  .menuSmall{
+    list-style-type: none;
+    padding: 0 20px;
+    margin: 0;
+  }
+  .menuSmall li{
+    padding: 8px;
+    margin-left: 10px;
+  }
+  .menuSmall>li>a>span{
+    padding-left: 5px;
+  }
+  .menuBig{
+    font-size: 17px;
+    padding: 20px;
+    padding-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    padding-top: 10px;
+  }
+  .menuSmall i{
+    color: #fffbfa
+  }
+  .copyright{
+    margin-top: 40%;
+    text-align: center;
+    font-size: 15px;
+  }
+  .menuSmall>li>span.close{
+    display: none;
+  }
+  .days>li>span.close{
+    display: none;
+  }
+  

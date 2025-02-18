@@ -1,3 +1,31 @@
+var date = new Date();
+if (date.getTimezoneOffset() == 0)
+    time = date.getTime() + (7 * 60 * 60 * 1000);
+else
+    time = date.getTime();
+date.setTime(time);
+
+var days = new Array('Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7');
+day = date.getDay();
+month = date.getMonth() + 1;
+year = date.getFullYear();
+document.getElementById('day-and-date').innerText = days[day] + ', ' + (date.getDate() < 10 ? '0' : '') + date.getDate() + '/' + (month < 10 ? '0' : '') + month + '/' + year;
+
+var timeElement = document.getElementById('time');
+var updateTimeInterval = setInterval(function () {
+    updateClock();
+}, 1000);
+
+function updateClock() {
+    if (timeElement) {
+        var newDate = new Date();
+        var localeTimeString = newDate.toLocaleTimeString();
+        timeElement.innerHTML = localeTimeString;
+    } else {
+        clearInterval(updateTimeInterval);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     //Welcome
     const name = localStorage.getItem('name');
@@ -5,7 +33,24 @@ document.addEventListener('DOMContentLoaded', async function() {
     const taskId = localStorage.getItem('taskId');
     console.log(name); //kiểm tra
     document.getElementById("name").innerHTML = `${name}`;
-
+    //Tạo thẻ con trong select
+    const todoGroup = document.getElementById('meomeo');
+    try {
+      const response = await fetch(`http://localhost:5000/api/label/list/${userId}`);
+      if (!response.ok) {
+        throw new Error('Không thể tải nhãn');
+      }
+      const labels = await response.json();
+      const today = new Date();
+      todoGroup.innerHTML = ''; 
+      labels.forEach(task => {
+        const opt = document.createElement('option');
+        opt.innerText = task.label;
+        todoGroup.append(opt);
+      });
+  } catch (error) {
+      alert("Lỗi hệ thống!")
+}
     //Hàm tạo element 
     const makeElement = function(task, dateType, list, addCloseButton) {
       const li = document.createElement('li');
@@ -52,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async function() {
           todoList.innerHTML = ''; 
           todos.forEach(task => {
             const dateType = new Date(task.createdAt);
-            if (dateType.getDate() == today.getDate())
+            if (dateType.getDate() === today.getDate() && dateType.getMonth() === today.getMonth() && dateType.getFullYear() === today.getFullYear())
             {
               if (!selected || task.filter === selected) {
               makeElement(task, dateType, todoList, addCloseButtonTodo);
@@ -223,7 +268,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
   }, false);
 
-  //Gắn sự kiện cho thẻ select
+  // Gắn sự kiện cho thẻ select
   const selectElement = document.getElementById('myItem');
   selectElement.addEventListener('change', async function () {
     const selected = selectElement.value; 

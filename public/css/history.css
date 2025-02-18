@@ -7,18 +7,34 @@ h1 {
     padding : 1rem;
 }
 #cache {
-    width : 80%;
+    width : 100%;
     margin : 1rem auto;
 }
 #cache > li {
     list-style: none;
     padding: 1rem;
     margin-top: 20px;
-    width : 80%;
+    width : 90%;
     margin : 1rem auto;
     z-index: 10;
     font-size: 1rem;
     background-color: #cd7d5d4d;
     color : black;
     border: 1px solid gray;
+    display: flex;
+}
+.under{
+    display: block !important;
+}
+.contentHistory{
+    width: 60%;
+
+}
+.timeHistory{
+    width: 20%;
+    text-align: left;
+}
+.dateHistory{
+    width: 20%;
+    text-align: right;
 }
